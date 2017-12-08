@@ -1,0 +1,50 @@
+{% load static %}
+
+
+<HTML>
+	<HEAD>
+	<TITLE>Skillstone</TITLE>
+	<link rel="stylesheet" type="text/css" href={% static "css/deck.css" %}>
+	</HEAD>
+	<BODY>
+	
+	<HR>
+		<a href="https://github.com/CouvignouJules/SkillStone">Github project</a>
+		<h1>Skillstone</h1>
+	<HR>
+
+
+	<table>
+		<h1>All cards : </h1>
+		{% for card in Cards %}
+			<tr>
+				<td>Name : {{ card.name}}</td>
+				<td>Health : {{ card.health}}</td>
+				<td>Attack : {{ card.attack}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+<!--
+	<input type="button" value="">
+	<input type="button" value="">
+
+	<table>
+		<h1>My cards : </h1>
+		{% for card in resultSet2.all %}
+			<tr>
+				<td>Name : {{ card.name}}</td>
+				<td>Life : {{ card.life}}</td>
+				<td>Attack : {{ card.attack}}</td>
+				<td>Defense : {{ card.defense}}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+-->
+
+
+
+	<script src={% static "js/play.js" %}></script>
+	</BODY>
+</HTML>
