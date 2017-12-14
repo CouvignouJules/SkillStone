@@ -14,7 +14,7 @@ class Effect(models.model):
 
 class EffectAdmin(admin.ModelAdmin):
 	list_display = ['name']
-    list_filter = ['name']
+	list_filter = ['name']
 	ordering = ['name']
 
 	fieldsets = (
