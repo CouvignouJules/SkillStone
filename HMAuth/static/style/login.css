@@ -6,6 +6,7 @@ body, html {
 	background-repeat: no-repeat;    /*background-image: linear-gradient(rgb(12, 97, 33),rgb(104, 145, 162));*/
 	background: black;
 	position: relative;
+	background-image:url(/static/img/background.jpg);
 }
 #login-box {
 	display: none;
@@ -16,10 +17,11 @@ body, html {
 	width: 350px;
 	margin: 0 auto;
 	border: 1px solid black;
-	background: rgba(48, 46, 45, 1);
+	background: rgba(48, 46, 45, 0.8);
 	min-height: 250px;
 	padding: 20px;
 	z-index: 9999;
+	border: none;
 }
 #login-box .logo .logo-caption {
 	font-family: 'Poiret One', cursive;
