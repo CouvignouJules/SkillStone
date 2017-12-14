@@ -1,21 +1,42 @@
-{% extends 'base.html' %}
-
 {% block content %}
-  <h2>Je crée mon compte</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Valider</button>
-  </form>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/login.css' %}" />
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+
+<div class="container">
+  <center>
+  <div id="login-box">
+    {% if form.errors %}
+      <p style="color: red">Votre mot de passe ou identifiant est incorrect.</p>
+    {% endif %}
+    <div class="logo">
+      <img src="{% static 'img/log.png' %}" class="img img-responsive img-circle center-block" draggable="false" style="-moz-user-select: none;"/>
+      <h1 class="logo-caption"><span class="tweak">I</span>nscription</h1>
+    </div><!-- /.logo -->
+    <div class="controls">
+      <form method="post">
+          <div class="controls">
+            {% csrf_token %}
+            {% for field in form %}
+              <p>
+                {{ field.label_tag }}<br>
+                {{ field }}
+                {% if field.help_text %}
+                  <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
+              </p>
+            {% endfor %}
+            <button type="submit">Valider</button>
+          </div>
+        <a href="{% url 'login' %}">Déjà inscrit ?</a>
+      </form>
+    </div><!-- /.controls -->
+  </div><!-- /#login-box -->
+  </center>
+</div><!-- /.container -->
+<div id="particles-js"></div>
 {% endblock %}

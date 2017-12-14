@@ -1,26 +1,43 @@
-{% extends 'base.html' %}
-
 {% block content %}
-  <h2>Se connecter</h2>
-  {% if form.errors %}
-    <p style="color: red">votre mot de pass ou identifiant est incorrect, essaye encore§</p>
-  {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}<br>
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-        {% if field.help_text %}
-          <p><small style="color: grey">{{ field.help_text }}</small></p>
-        {% endif %}
-      </p>
-    {% endfor %}
-    <button type="submit">Se Conecter</button>
-    <a href="{% url 'signup' %}">Je suis nouveau !!!</a>
-  </form>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style/login.css' %}" />
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+
+<div class="container">
+  <center>
+  <div id="login-box">
+    {% if form.errors %}
+      <p style="color: red">Votre mot de passe ou identifiant est incorrect.</p>
+    {% endif %}
+    <div class="logo">
+      <img src="{% static 'img/log.png' %}" class="img img-responsive img-circle center-block" draggable="false" style="-moz-user-select: none;"/>
+      <h1 class="logo-caption"><span class="tweak">C</span>onnexion</h1>
+    </div><!-- /.logo -->
+    <div class="controls">
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+          <div class="controls">
+            {% for field in form %}
+              <p>
+                {{ field.label_tag }}<br>
+                {{ field }}<br>
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
+                {% if field.help_text %}
+                  <p><small style="color: grey">{{ field.help_text }}</small></p>
+                {% endif %}
+              </p>
+            {% endfor %}
+            <button type="submit">Se connecter</button>
+          </div><!-- /.controls -->
+        <a href="{% url 'signup' %}">Créer un compte</a>
+      </form>
+    </div><!-- /.controls -->
+  </div><!-- /#login-box -->
+  </center>
+</div><!-- /.container -->
+<div id="particles-js"></div>
 {% endblock %}
