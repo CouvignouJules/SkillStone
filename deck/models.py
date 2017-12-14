@@ -68,8 +68,8 @@ class CardAdmin(admin.ModelAdmin):
 class Player(models.Model):
 	pseudo = models.CharField(max_length=30)
 	life = models.IntegerField(default=30)
-	hand = models.ManyToManyField(Card)
-	deck = models.ManyToManyField(Card)
+	hand = models.ManyToManyField(Card, related_name='moncul')
+	deck = models.ManyToManyField(Card, related_name='moncul2')
 
 	def setLife(self, life):
 		self.life = life
