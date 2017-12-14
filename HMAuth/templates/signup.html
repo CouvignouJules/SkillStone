@@ -5,38 +5,40 @@
 <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
 
 <div class="container">
-  <center>
-  <div id="login-box">
-    {% if form.errors %}
-      <p style="color: red">Votre mot de passe ou identifiant est incorrect.</p>
-    {% endif %}
-    <div class="logo">
-      <img src="{% static 'img/log.png' %}" class="img img-responsive img-circle center-block" draggable="false" style="-moz-user-select: none;"/>
-      <h1 class="logo-caption"><span class="tweak">I</span>nscription</h1>
-    </div><!-- /.logo -->
-    <div class="controls">
-      <form method="post">
-          <div class="controls">
-            {% csrf_token %}
-            {% for field in form %}
-              <p>
-                {{ field.label_tag }}<br>
-                {{ field }}
-                {% if field.help_text %}
-                  <small style="color: grey">{{ field.help_text }}</small>
-                {% endif %}
-                {% for error in field.errors %}
-                  <p style="color: red">{{ error }}</p>
-                {% endfor %}
-              </p>
-            {% endfor %}
-            <button type="submit">Valider</button>
-          </div>
-        <a href="{% url 'login' %}">Déjà inscrit ?</a>
-      </form>
-    </div><!-- /.controls -->
-  </div><!-- /#login-box -->
-  </center>
+    <center>
+        <div id="login-box">
+            {% if form.errors %}
+            <p style="color: red">Votre mot de passe ou identifiant est incorrect.</p>
+            {% endif %}
+            <div class="logo">
+                <img src="{% static 'img/log.png' %}" class="img img-responsive img-circle center-block" draggable="false" style="-moz-user-select: none;"/>
+                <h1 class="logo-caption"><span class="tweak">I</span>nscription</h1>
+            </div><!-- /.logo -->
+            <div class="controls">
+                <form method="post">
+                    <div class="controls">
+                        {% csrf_token %}
+                        <table class="table">
+                            <tr>
+                                <td><label for="id_username">Username</label></td>
+                                <td><input id="id_username" name="username" type="text" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_password1">Password</label></td>
+                                <td><input id="id_password1" name="password1" type="password" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_password2">Password</label></td>
+                                <td><input id="id_password2" name="password2" type="password" class="form-control"></td>
+                            </tr>
+                        </table>
+                        <button type="submit">Valider</button>
+                    </div>
+                    <a href="{% url 'login' %}">Déjà inscrit ?</a>
+                </form>
+            </div><!-- /.controls -->
+        </div><!-- /#login-box -->
+    </center>
 </div><!-- /.container -->
 <div id="particles-js"></div>
 {% endblock %}
