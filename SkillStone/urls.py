@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from HMAuth import views as HMAuth_views
 from deck import views as deck_views
+from game import views as game_views
 
 urlpatterns = [
     url(r'^$', HMAuth_views.home, name='home'),
@@ -28,4 +29,5 @@ urlpatterns = [
     url(r'^signup/$', HMAuth_views.signup, name='signup'),
     # url(r'^deck/$', deck_views.signup, name='deck'),
     url(r'^admin/', admin.site.urls),
+    url(r'^$', game_views.cardAttackCard, name='attackCard'),
 ]
