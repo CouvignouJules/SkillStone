@@ -1,7 +1,13 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h2>Bienvenue, {{ user.username }}!</h2>
-  <button><a><a href="{% url 'deck' %}">Jouer</a></a></button>
-  <button><a><a href="{% url 'deck' %}">Mon Deck</a></a></button>
+{% extends 'base.html' %} {% block content %}
+<h2>Bienvenue, {{ user.username }}!</h2>
+<button>
+  <a>
+    <a href="{% url 'game' %}">Jouer</a>
+  </a>
+</button>
+<button>
+  <a>
+    <a href="{% url 'deck' %}">Mon Deck</a>
+  </a>
+</button>
 {% endblock %}
