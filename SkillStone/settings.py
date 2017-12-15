@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'deck',
+    'deck',
     'HMAuth',
 ]
 
@@ -83,6 +83,10 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306'
+
+        # Thomas => Laissez ces 2 lignes telles qu'elles, je m'en sert car je ne peux pas faire de mysql avec django
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': 'db.sqlite3',
     }
 }
 
