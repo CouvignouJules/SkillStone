@@ -38,9 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'deck',
-    'game',
     'HMAuth',
-    'rest_framework'
 ]
 
 MIDDLEWARE = [
