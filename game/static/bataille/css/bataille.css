@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+
+#bataille {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	background-color: rgba(116, 194, 231, 0.3);
+	width: 15%;
+	height: 250px;
+	text-align: center;
+	border-radius: 0px 70px 0px 0px;
+	font-family: 'Poiret One', sans-serif;
+    font-weight: bold;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#message-bataille {
+	display: none;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	background-color: rgba(10, 10, 10, 0.8);
+	width: 15%;
+	height: 250px;
+	text-align: center;
+	border-radius: 0px 70px 0px 0px;
+	font-family: 'Poiret One', sans-serif;
+    font-weight: bold;
+    color: orange;
+	overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#message-rotation {
+    font-size: 320%;
+	position: absolute;
+	left: 40%;
+	bottom: 15%;
+	-webkit-transform: rotate(-115deg);
+	-moz-transform: rotate(-115deg);
+	-o-transform: rotate(-115deg);
+	writing-mode: tb-rl;
+}
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+    display: inline;
+    color: black;
+    font-size: 20px;
+}
+#bataille img {
+	border-radius: 10%;
+}
+.centered {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#bataille-logo {
+	position: fixed;
+	bottom: 200px;
+	left: 15%;
+	width: 90px;
+	transform: rotate(40deg);
+	transform-origin: -20% -50%;
+}

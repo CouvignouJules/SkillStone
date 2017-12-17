@@ -1,22 +1,26 @@
 {% load static %}
 
-<HTML>
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src={% static "bataille/js/bataille.js" %}></script>
 
-<HEAD>
-    <TITLE>Skillstone</TITLE>
-    <link rel="stylesheet" type="text/css" href={% static "css/deck.css" %}>
-</HEAD>
+<head>
+    <title>Skillstone - En partie</title>
+    <link rel="stylesheet" type="text/css" href={% static "css/board.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "bataille/css/bataille.css" %}>
+</head>
 
-<BODY>
+<body>
+    <!--<script src={% static "js/play.js" %}></script>-->
 
-    <HR>
-    <h1>Skillstone</h1>
-    <HR>
-
-
-    <h2>Game</h2>
-
-    <script src={% static "js/play.js" %}></script>
-</BODY>
-
-</HTML>
+    <!-- Bataille -->
+    <div id="bataille" onclick="next_click()">
+    	<img id="bataille-logo" src={% static "bataille/img/logo.png" %} draggable="false" style="-moz-user-select: none;" />
+    	<br />
+    	Le méchant :
+    	<div id="comp"></div>
+    	<br /> Toi, jeune héros :
+    	<div id="vous"></div>
+    	<br />
+    </div>
+    <div id="message-bataille"><span id="message-rotation"></span></div>
+</body>
