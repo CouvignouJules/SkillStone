@@ -2,7 +2,6 @@ from django.http import HttpResponse
 from channels.handler import AsgiHandler
 from channels import Group
 
-
 def ws_connect(message):
 	# On doit stipuler que la connexion est acceptée
 	message.reply_channel.send({"accept": True})
@@ -40,6 +39,7 @@ def ws_message(message):
 
 	#...
 """
+
 
 def ws_disconnect(message):
 	# Désabonnement du groupe
