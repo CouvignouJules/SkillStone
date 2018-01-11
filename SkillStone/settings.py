@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'deck',
     'game',
     'HMAuth',
+    'skillsocket'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,8 @@ ROOT_URLCONF = 'SkillStone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'SkillStone/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'SkillStone/templates'),
+                 os.path.join(BASE_DIR, "skillsocket/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

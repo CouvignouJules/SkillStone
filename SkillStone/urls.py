@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from HMAuth import views as hmauth_views
@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^deck/$', deck_views.deck, name='deck'),
     url(r'^game/$', game_views.game, name='game'),
     url(r'^admin/', admin.site.urls),
+    url(r'^ws/', include('skillsocket.urls')),
 
 ]
