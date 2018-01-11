@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib import admin
 
@@ -7,7 +8,7 @@ class CardType(models.Model):
     name = models.CharField(max_length=30)
 
 
-class CardTypeAdmin(models.Model):
+class CardTypeAdmin(admin.ModelAdmin):
     list_display = ['name']
     list_filter = ['name']
     ordering = ['name']
@@ -66,15 +67,9 @@ class CardAdmin(admin.ModelAdmin):
             }
         ),
         (
-            'Spécificité monstre', {
+            'Spécificités de la carte', {
                 'description': 'Création d\'une carte monstre',
                 'fields': ['attack', 'health', 'effect']
-            }
-        ),
-        (
-            'Spécificité sort', {
-                'description': 'Création d\'une carte sort',
-                'fields': ['effect']
             }
         )
     )

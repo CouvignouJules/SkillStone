@@ -8,3 +8,4 @@ admin.site.register(Effect, EffectAdmin)
 admin.site.register(Card, CardAdmin)
 admin.site.register(Player, PlayerAdmin)
 """
+
