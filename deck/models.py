@@ -3,7 +3,7 @@ from django.contrib import admin
 
 
 class CardType(models.Model):
-    id = models.AutoField(primary_key=True)
+    #id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
 
 
@@ -23,7 +23,7 @@ class CardTypeAdmin(models.Model):
 
 
 class Effect(models.Model):
-    id = models.AutoField(primary_key=True)
+    #id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
 
 
@@ -43,7 +43,7 @@ class EffectAdmin(admin.ModelAdmin):
 
 
 class Card(models.Model):
-    id = models.AutoField(primary_key=True)
+    #id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     cost = models.IntegerField()
@@ -66,15 +66,9 @@ class CardAdmin(admin.ModelAdmin):
             }
         ),
         (
-            'Spécificité monstre', {
+            'Spécificités de la carte', {
                 'description': 'Création d\'une carte monstre',
                 'fields': ['attack', 'health', 'effect']
-            }
-        ),
-        (
-            'Spécificité sort', {
-                'description': 'Création d\'une carte sort',
-                'fields': ['effect']
             }
         )
     )
