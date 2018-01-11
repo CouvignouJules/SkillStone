@@ -7,7 +7,7 @@ class CardType(models.Model):
     name = models.CharField(max_length=30)
 
 
-class CardTypeAdmin(models.Model):
+class CardTypeAdmin(admin.ModelAdmin):
     list_display = ['name']
     list_filter = ['name']
     ordering = ['name']
