@@ -36,12 +36,12 @@ function inidata() {
 }
 
 function refresh_all() {
-    document.getElementById("vous").innerHTML = "<img src='/static/bataille/img/" + vous[0] + ".gif' draggable='false' style='-moz-user-select: none;'>&nbsp;" +
+    document.getElementById("vous").innerHTML = "<img src='/static/bataille/img/" + vous[0] + ".GIF' draggable='false' style='-moz-user-select: none;'>&nbsp;" +
     	"<div class='container'>" +
 		"<img src='/static/bataille/img/blank.jpg' width='47' heigth='68' draggable='false' style='-moz-user-select: none;'>" +
 		"<div class='centered' id='center-vous'>Centered</div>" +
 		"</div>";
-    document.getElementById("comp").innerHTML = "<img src='/static/bataille/img/" + comp[0] + ".gif' draggable='false' style='-moz-user-select: none;'>&nbsp;" + 
+    document.getElementById("comp").innerHTML = "<img src='/static/bataille/img/" + comp[0] + ".GIF' draggable='false' style='-moz-user-select: none;'>&nbsp;" + 
     	"<div class='container'>" +
 		"<img src='/static/bataille/img/blank.jpg' width='47' heigth='68' draggable='false' style='-moz-user-select: none;'>" +
 		"<div class='centered' id='center-comp'>Centered</div>" +
