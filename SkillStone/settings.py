@@ -143,3 +143,29 @@ CHANNEL_LAYERS = {
     "ROUTING": "skillsocket.routing.channel_routing",
     }
 }
+
+# Va envoyer tous les logs dans un fichier skillstone.log qui peut peser au maximum 15 Mo
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'file': {
+        'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        'class':'logging.handlers.RotatingFileHandler',
+        'filename': os.path.join(DJANGO_ROOT, 'skillstone.log'),
+        'maxBytes': 1024*1024*15, # 15 Mo
+        'backupCount': 10,
+    },
+    },
+    'loggers': {
+        'APPNAME': {
+            'handlers': ['file',],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    }
+}
