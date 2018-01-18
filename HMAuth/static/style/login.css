@@ -3458,12 +3458,12 @@ a.waves-effect .waves-ripple {
   min-height: 100vh;
   /* You might also want to use
                         'height' property instead.
-                        
+
                         Note that for percentage values of
                         'height' or 'min-height' properties,
                         the 'height' of the parent element
                         should be specified explicitly.
-  
+
                         In this case the parent of '.vertical-center'
                         is the <body> element */
   /* Make it a flex container */
@@ -3483,7 +3483,7 @@ a.waves-effect .waves-ripple {
   width: 100%;
   /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
      hence the bootstrap's container won't be aligned to the center anymore.
-  
+
      Therefore, we should use the following declarations to get it centered again */
   -webkit-box-pack: center;
   -moz-box-pack: center;

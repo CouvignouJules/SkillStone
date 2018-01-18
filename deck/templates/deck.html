@@ -1,53 +1,47 @@
 {% load static %}
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href={% static "css/w3.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/profile.css" %}>
 
-<HTML>
+<body>
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="{% url 'profile' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">
+      <img id="img-logo" src="{% static 'img/img-logo.png' %}" draggable="false" style="-moz-user-select: none;"/>
+    </a>
+    <a href="{% url 'deck' %}" class="w3-bar-item w3-button w3-padding-large w3-white">Mon Deck</a>
+    <a href="https://github.com/CouvignouJules/SkillStone" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Github</a>
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Déconnexion</a>
+  </div>
 
-<HEAD>
-	<TITLE>Skillstone</TITLE>
-	<link rel="stylesheet" type="text/css" href={% static "css/deck.css" %}>
-</HEAD>
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="{% url 'deck' %}" class="w3-bar-item w3-button w3-padding-large">Mon Deck</a>
+      <a href="https://github.com/CouvignouJules/SkillStone" class="w3-bar-item w3-button w3-padding-large">Github</a>
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Déconnexion</a>
+  </div>
+</div>
 
-<BODY>
-
-	<HR>
-	<a href="https://github.com/CouvignouJules/SkillStone">Github project</a>
-	<h1>Skillstone</h1>
-	<HR>
-
-
-	<table>
-		<h1>All cards : </h1>
-		{% for card in Cards %}
-		<tr>
-			<td>Name : {{ card.name}}</td>
-			<td>Health : {{ card.health}}</td>
-			<td>Attack : {{ card.attack}}</td>
-		</tr>
-		{% endfor %}
-	</table>
-
-	<!--
-	<input type="button" value="">
-	<input type="button" value="">
-
-	<table>
-		<h1>My cards : </h1>
-		{% for card in resultSet2.all %}
-			<tr>
-				<td>Name : {{ card.name}}</td>
-				<td>Life : {{ card.life}}</td>
-				<td>Attack : {{ card.attack}}</td>
-				<td>Defense : {{ card.defense}}</td>
-			</tr>
-		{% endfor %}
-	</table>
-
--->
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+  <h2 class="w3-margin w3-jumbo">Mon deck</h2>
+</header>
 
 
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
 
-	<script src={% static "js/play.js" %}></script>
-</BODY>
-
-</HTML>
+</body>
