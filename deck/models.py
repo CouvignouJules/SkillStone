@@ -53,6 +53,12 @@ class Card(models.Model):
     cardType = models.ForeignKey(CardType, on_delete=models.CASCADE)
     effect = models.ManyToManyField(Effect)
 
+    def setHealth(self,health):
+        self.health = health
+
+    def getAttack(self):
+        return self.attack
+
 
 class CardAdmin(admin.ModelAdmin):
     list_display = ['name', 'cost', 'attack', 'health', 'cardType', 'effect']
@@ -89,13 +95,19 @@ class Player(models.Model):
             self.pseudo = pseudo
 
     def addCardToHand(self, card):
-        if hand.count() < 11:
+        if self.hand.count() < 11:
             self.hand.add(card)
 
     def addCardToDeck(self, card):
-        if deck.count() < 31:
+        if self.deck.count() < 31:
             self.deck.add(card)
 
+    def drawFromDeck(self):
+        self.hand.add(self.deck.first())
+        self.deck.remove(self.deck.first())
+
+    def getLife(self):
+        return self.life
 
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ['pseudo', 'life', 'hand', 'deck']

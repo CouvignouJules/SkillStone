@@ -19,14 +19,21 @@ socket.onopen = function() {
 socket.onmessage = function(e) {
 	var result = JSON.parse(e.data);
 	/* A la réception d'un message */
-	if(result["username"] != document.getElementById('user').innerHTML) { // Peut-etre enlever ? (animation pour les 2 joueurs?)
+
         console.log(Date.now() + ' - ' + e.data);
         console.log(result["action"]);
         if (result["action"] != null) {
             switch (result["action"]) {
 				case "join":
-					// Connexion d'un joueur, animation en JS ?
-					console.log("Bienvenue " + result["username"]); // debug ..
+					if(result["username"] != document.getElementById('user').innerHTML) {
+                        // Connexion d'un joueur, animation en JS ?
+						tr = document.getElementById('ennemyHand').appendChild(document.createElement("tr"));
+						for (var i = 0; i < 5; i++) {
+                            card = tr.insertCell(0);
+                            card.innerHTML = "CARTE N°"+i; // TODO : virer et mettre animation avec image ..
+                        }
+                        console.log("Bienvenue " + result["username"]); // debug ..
+                    }
 					break;
 
                 case "draw":
@@ -39,8 +46,9 @@ socket.onmessage = function(e) {
 					console.log(result["username"] + " pose la carte ");
                     break;
 
-                case "attack":
+				case "attack":
                     // L'autre joueur attaque, petite animation en JS ?
+					// MAJ pdv joueur/carte, carte dead ou pas, fin partie ou pas
 					console.log(result["username"] + " attaque avec ");
                     break;
 
@@ -49,7 +57,7 @@ socket.onmessage = function(e) {
                     break;
             }
         }
-    }
+
 };
 
 function draw(number){
@@ -94,7 +102,8 @@ function attack(user,attackingCard,target){
 			"action": "draw",
 			"username": document.getElementById('user').innerHTML,
 			"attackingCard": attackingCard,
-			"target": target
+			"target": target,
+			"lostHealth": 0
 		};
 		socket.send(JSON.stringify(data));
 	}

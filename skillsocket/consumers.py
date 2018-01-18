@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from channels.handler import AsgiHandler
 from channels import Group
+from deck.models import Card
+from deck.models import Player
 
 def ws_connect(message):
 	# On doit stipuler que la connexion est acceptée
@@ -22,20 +24,34 @@ def ws_message(message):
 		message.reply_channel.send({"text": 'JSON error'})
 
 	elif obj['action'] == 'join':
-		# Insertion du nouveau joueur en base de données
-		print("join");
+		# Que faire niveau backend ?
 		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
 
 	elif obj['action'] == 'draw':
+		result = Player.objects.filter(pseudo=obj['username'])
+
+		for i in obj['number']:
+			result.Player.drawFromDeck()
+
 		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
-		# Modification de la main joueur 2 en base de données ?
 
 	elif obj['action'] == 'put':
-		# Modification des cartes posées sur le terrain en base de données
 		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
 
 	elif obj['action'] == 'attack':
+
+		player = Player.objects.filter(pseudo=obj['username'])
+
+		attackingCard = Card.objects.filter(name=obj['attackingCard'])
+		target = Card.objects.filter(name=obj['target'])
+		if not target.exists(): #Sert à savoir si une carte est attaquée ou un joueur
+			target = Player.objects.filter(pseudo=obj['target'])
+			target.Player.setLife(target.Player.getLife() - attackingCard.Card.getAttack())
+
+		obj['lostHealth'] = attackingCard.getAttack()
 		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+
+
 		# Modification des points de vie de un tel
 		# Vérification de fin de partie ou non
 
