@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'deck',
     'game',
     'HMAuth',
@@ -132,3 +133,40 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR) # this will help django to locate the files
+
+
+CHANNEL_LAYERS = {
+    "default": {
+    # Gestion du layer en RAM, ne permet pas un
+    # fonctionnement ASYNC/Cross process
+    "BACKEND": "asgiref.inmemory.ChannelLayer",
+    "ROUTING": "skillsocket.routing.channel_routing",
+    }
+}
+
+# Va envoyer tous les logs dans un fichier skillstone.log qui peut peser au maximum 15 Mo
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'file': {
+        'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        'class':'logging.handlers.RotatingFileHandler',
+        'filename': os.path.join(BASE_DIR, 'skillstone.log'),
+        'maxBytes': 1024*1024*15, # 15 Mo
+        'backupCount': 10,
+    },
+    },
+    'loggers': {
+        'SkillStone': {
+            'handlers': ['file',],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    }
+}

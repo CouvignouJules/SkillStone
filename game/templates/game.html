@@ -2,6 +2,7 @@
 
 <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script src={% static "bataille/js/bataille.js" %}></script>
+<script src={% static "js/socket.js" %}></script>
 
 <head>
     <title>Skillstone - En partie</title>
@@ -12,6 +13,7 @@
 <body>
     <!--<script src={% static "js/play.js" %}></script>-->
 
+    <div id="user" style="display:none ">{{ user.username }}</div> <!-- balise cachée qui nous sert à passer l'user actuel au JS -->
     <!-- Bataille -->
     <div id="bataille" onclick="next_click()">
     	<img id="bataille-logo" src={% static "bataille/img/logo.png" %} draggable="false" style="-moz-user-select: none;" />
@@ -21,6 +23,8 @@
     	<br /> Toi, jeune héros :
     	<div id="vous"></div>
     	<br />
+
+        <input type="button" onclick="draw(1)"> <!-- TODO : 1 a changer par le nombre de cartes piochée(s) -->
     </div>
     <div id="message-bataille"><span id="message-rotation"></span></div>
 </body>
