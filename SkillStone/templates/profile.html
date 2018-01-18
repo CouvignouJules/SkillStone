@@ -12,14 +12,14 @@
     <a href="{% url 'profile' %}" class="w3-bar-item w3-button w3-padding-large w3-white">
       <img id="img-logo" src="{% static 'img/img-logo.png' %}" draggable="false" style="-moz-user-select: none;"/>
     </a>
-    <a href="{% url 'deck' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Mon Deck</a>
+    <a href="{% url 'collection' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Mon Deck</a>
     <a href="https://github.com/CouvignouJules/SkillStone" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Github</a>
     <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Déconnexion</a>
   </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="{% url 'deck' %}" class="w3-bar-item w3-button w3-padding-large">Mon Deck</a>
+    <a href="{% url 'collection' %}" class="w3-bar-item w3-button w3-padding-large">Mon Deck</a>
       <a href="https://github.com/CouvignouJules/SkillStone" class="w3-bar-item w3-button w3-padding-large">Github</a>
     <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Déconnexion</a>
   </div>
