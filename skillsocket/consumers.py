@@ -23,6 +23,7 @@ def ws_message(message):
 
 	elif obj['action'] == 'join':
 		# Insertion du nouveau joueur en base de données
+		print("join");
 		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
 
 	elif obj['action'] == 'draw':

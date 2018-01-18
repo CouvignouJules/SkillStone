@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+body,h1,h2,h3,h4,h5,h6 {
+  font-family: "Lato", sans-serif
+}
+.w3-bar,h1,button {
+  font-family: "Montserrat", sans-serif
+}
+.fa-anchor,.fa-coffee {
+  font-size:200px
+}
+.w3-container {
+  background: rgba(0,0,0,0.3) !important;
+  height: 100%;
+}
+.w3-bar {
+  font-family: 'Nunito', sans-serif;
+  background: rgba(0,0,0,0.6) !important;
+}
+body {
+  font-family: 'Poiret One', sans-serif !important;
+  background: url('/static/img/background_profile.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+#img-logo {
+  width: 27px !important;
+}
+.w3-white, .w3-hover-white:hover {
+    background-color: rgb(255,255,255,0.3) !important;
+}
+.w3-xlarge {
+    font-weight: bold;
+}
