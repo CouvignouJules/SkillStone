@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'deck',
     'game',
     'HMAuth',
-    'skillsocket'
+    'skillsocket',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
