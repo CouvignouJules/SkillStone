@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib import admin
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class CardType(models.Model):
@@ -39,6 +42,7 @@ class EffectAdmin(admin.ModelAdmin):
 
 class Card(models.Model):
     name = models.CharField(max_length=30)
+    img = models.ImageField(upload_to='static/img/card', default='static/img/card/deck.jpg')
     description = models.CharField(max_length=100)
     cost = models.IntegerField()
     attack = models.IntegerField()
@@ -58,7 +62,7 @@ class CardAdmin(admin.ModelAdmin):
     fieldsets = [
         ('nom', {
             'description': 'nom',
-            'fields': ['name', 'cardType', 'description']
+            'fields': ['name', 'img', 'cardType', 'description']
         }),
         ('stat', {
             'description': 'stat',
@@ -94,27 +98,35 @@ class DeckAdmin(admin.ModelAdmin):
 
 
 class Player(models.Model):
-    pseudo = models.CharField(max_length=30)
-    life = models.IntegerField(default=30)
-    hand = models.ManyToManyField(Card, related_name='card')
-    deck = models.ForeignKey('Deck', on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cardCollection = models.ManyToManyField(Card, related_name='cardCollection')
+    deckCollection = models.ManyToManyField(Deck, related_name='deckCollection')
 
     def __str__(self):
-        return self.pseudo
+        return self.user.username
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Player.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.player.save()
 
 
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ['pseudo', 'life', 'deck']
+    list_display = ['user']
     search_fields = ['deck']
     list_filter = []
     ordering = ['id']
     fieldsets = [
-        ('player', {
-            'description': 'player',
-            'fields': ['pseudo']
+        ('Profile', {
+            'description': 'Profile',
+            'fields': ['user']
         }),
         ('deck',{
             'description': 'deck',
-            'fields': ['deck']
+            'fields': ['cardCollection', 'deckCollection']
         })
     ]
