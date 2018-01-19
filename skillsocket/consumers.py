@@ -3,6 +3,11 @@ from channels.handler import AsgiHandler
 from channels import Group
 from deck.models import Card
 from deck.models import Player
+from django.contrib.auth.models import User
+from django.core.cache import caches
+from django.core.cache import cache
+
+
 
 def ws_connect(message):
 	# On doit stipuler que la connexion est acceptée
@@ -11,6 +16,7 @@ def ws_connect(message):
 	#if Group("player").__sizeof__() < 2:
 	Group("player").add(message.reply_channel)
 
+
 def ws_message(message):
 
 	import json
@@ -18,42 +24,45 @@ def ws_message(message):
 	obj = json.loads(message.content['text'])
 
 
-
 	# En fonction de l'action, modification côté serveur ... model par exemple
 	if "action" not in obj:
 		message.reply_channel.send({"text": 'JSON error'})
+	else:
+		tableUser = User.objects.filter(username=obj['username'])
+		player = Player.objects.filter(user=tableUser)
 
-	elif obj['action'] == 'join':
-		# Que faire niveau backend ?
-		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
-
-	elif obj['action'] == 'draw':
-		result = Player.objects.filter(pseudo=obj['username'])
-
-		for i in obj['number']:
-			result.Player.drawFromDeck()
-
-		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
-
-	elif obj['action'] == 'put':
-		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
-
-	elif obj['action'] == 'attack':
-
-		player = Player.objects.filter(pseudo=obj['username'])
-
-		attackingCard = Card.objects.filter(name=obj['attackingCard'])
-		target = Card.objects.filter(name=obj['target'])
-		if not target.exists(): #Sert à savoir si une carte est attaquée ou un joueur
-			target = Player.objects.filter(pseudo=obj['target'])
-			target.Player.setLife(target.Player.getLife() - attackingCard.Card.getAttack())
-
-		obj['lostHealth'] = attackingCard.getAttack()
-		Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+		if obj['action'] == 'join':
+			# Que faire niveau backend ?
 
 
-		# Modification des points de vie de un tel
-		# Vérification de fin de partie ou non
+			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+
+		elif obj['action'] == 'draw':
+
+			for i in range(1,obj['number']):
+				player.Player.drawFromDeck()
+
+			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+
+		elif obj['action'] == 'put':
+			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+
+		elif obj['action'] == 'attack':
+
+
+			#attackingCard = Card.objects.filter(name=obj['attackingCard'])
+			#target = Card.objects.filter(name=obj['target'])
+			#if not target.exists(): #Sert à savoir si une carte est attaquée ou un joueur
+			#	target = Player.objects.filter(pseudo=obj['target'])
+			#	target.Player.setLife(target.Player.getLife() - attackingCard.Card.getAttack())
+
+			#obj['lostHealth'] = attackingCard.getAttack()
+
+			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+
+
+			# Modification des points de vie de un tel
+			# Vérification de fin de partie ou non
 
 
 

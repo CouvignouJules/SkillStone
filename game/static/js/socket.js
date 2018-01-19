@@ -1,6 +1,6 @@
 
 
-socket = new WebSocket("ws://192.168.42.235:8000");
+socket = new WebSocket("ws://10.13.7.97:8000");
 
 socket.onopen = function() {
 	/* Méthode appelée juste après la connexion */
@@ -20,18 +20,11 @@ socket.onmessage = function(e) {
 	var result = JSON.parse(e.data);
 	/* A la réception d'un message */
 
-        console.log(Date.now() + ' - ' + e.data);
-        console.log(result["action"]);
         if (result["action"] != null) {
             switch (result["action"]) {
 				case "join":
 					if(result["username"] != document.getElementById('user').innerHTML) {
                         // Connexion d'un joueur, animation en JS ?
-						tr = document.getElementById('ennemyHand').appendChild(document.createElement("tr"));
-						for (var i = 0; i < 5; i++) {
-                            card = tr.insertCell(0);
-                            card.innerHTML = "CARTE N°"+i; // TODO : virer et mettre animation avec image ..
-                        }
                         console.log("Bienvenue " + result["username"]); // debug ..
                     }
 					break;
