@@ -9,11 +9,13 @@ from random import *
 from django.contrib.auth.models import User
 import json
 
+
 class Rules(models.Model):
     playersHP = models.IntegerField(default=30)     # Nombre de points de vie de chaque joueur
     startingHand = models.IntegerField(default=3)   # Nombre de cartes dans la main du joueur au début de la game
     spellUse = models.BooleanField(default=True)    # Autorisation d'utiliser les sorts ou non
     monstersBoard = models.IntegerField(default=7)  # Nombre de monstres autorisés sur chaque plateau
+
 
 class RulesAdmin(admin.ModelAdmin):
     list_display = ['playersHP', 'startingHand', 'spellUse', 'monstersBoard']
