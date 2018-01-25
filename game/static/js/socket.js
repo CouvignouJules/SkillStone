@@ -1,6 +1,6 @@
 
 
-socket = new WebSocket("ws://10.13.7.97:8000");
+socket = new WebSocket("ws://" + window.location.host);
 
 socket.onopen = function() {
 	/* Méthode appelée juste après la connexion */
@@ -27,6 +27,7 @@ socket.onmessage = function(e) {
                         // Connexion d'un joueur, animation en JS ?
                         console.log("Bienvenue " + result["username"]); // debug ..
                     }
+                    result["gameIsFull"] ? console.log("Game is full") : console.log(" OKKK ")
 					break;
 
                 case "draw":
@@ -75,7 +76,7 @@ function put(card){
 
 	if (socket.readyState === WebSocket.OPEN) {
 		data = {
-			"action": "draw",
+			"action": "put",
 			"username": document.getElementById('user').innerHTML,
 			"card": card
 		};
@@ -92,11 +93,10 @@ function attack(user,attackingCard,target){
 
 	if (socket.readyState === WebSocket.OPEN) {
 		data = {
-			"action": "draw",
+			"action": "attack",
 			"username": document.getElementById('user').innerHTML,
 			"attackingCard": attackingCard,
-			"target": target,
-			"lostHealth": 0
+			"target": target
 		};
 		socket.send(JSON.stringify(data));
 	}

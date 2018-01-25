@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '6u)$tyv&d!q9ed&oy2n#%ikkj6dpb1@y-@_ni#n7=sm*qu)fq5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.13.7.97"]
+ALLOWED_HOSTS = [socket.gethostbyname(socket.gethostname())]
 
 
 # Application definition
@@ -172,21 +173,4 @@ LOGGING = {
 }
 
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '10.13.7.97:8000',
-        'TIMEOUT': 3600,
-        'OPTIONS': {
-            'MAX_ENTRIES': 5000
-        }
-    },
-    'game': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '10.13.7.97:8000',
-        'TIMEOUT': 3600,
-        'OPTIONS': {
-            'MAX_ENTRIES': 5000
-        }
-    }
-}
+
