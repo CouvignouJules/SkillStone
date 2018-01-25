@@ -10,7 +10,15 @@ from .serializer import DeckSerializer, CardSerializer
 
 @login_required
 def myCollection(request):
-    return render(request, 'deck.html')
+    cards = Card.objects.all()
+    collection = getcollection(request.user.id)
+    newdeck = []
+
+    def addtodeck(id):
+        newdeck.append(id)
+
+        
+    return render(request, 'deck.html', locals())
 
 
 @api_view(['GET', 'POST'])
@@ -45,7 +53,15 @@ def deck(request, id=None):
 
 
 @api_view(['GET'])
-def collection(request):
-    collection = Card.objects.all()
+def collection(request, user=None):
+    return Response(getcollection(user))
+
+
+def getcollection(user):
+    if user:
+        collection = Card.objects.raw('SELECT * FROM deck_player_cardcollection LEFT JOIN deck_card ON deck_player_cardcollection.card_id = deck_card.id WHERE (deck_player_cardcollection.player_id = %s)',[user])
+    else:
+        collection = Card.objects.all()
     serializer = CardSerializer(collection, many=True)
-    return Response(serializer.data)
+    return serializer.data
+    deck

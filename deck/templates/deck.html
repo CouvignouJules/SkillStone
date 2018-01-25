@@ -5,6 +5,9 @@
 <link rel="stylesheet" type="text/css" href={% static "css/w3.css" %}>
 <link rel="stylesheet" type="text/css" href={% static "css/profile.css" %}>
 
+<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static "js/deck.js" %}"></script>
+
 <body>
 <!-- Navbar -->
 <div class="w3-top">
@@ -25,6 +28,22 @@
     <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Déconnexion</a>
   </div>
 </div>
+<div id="collection" style="text-align: center">
+    <table>
+    {% for card in cards %}
+        <tr>
+            <td class="card" id="{{ card.id }}">{{ card.name }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+<div>
+    <table id="newdeck">
+
+    </table>
+</div>
+
+
 
 <!-- Header -->
 <header class="w3-container w3-red w3-center" style="padding:128px 16px">
