@@ -96,7 +96,6 @@ class Game(models.Model):
     def deckToJson(self,deck):
         data = {}
         data['name'] = deck.name
-        data['description'] = deck.description
         data['cards'] = []
         for card in deck.cards.all():
             data['cards'].append(Game.cardToJson(self,card))

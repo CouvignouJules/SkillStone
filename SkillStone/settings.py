@@ -26,9 +26,8 @@ SECRET_KEY = '6u)$tyv&d!q9ed&oy2n#%ikkj6dpb1@y-@_ni#n7=sm*qu)fq5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [socket.gethostbyname(socket.gethostname())]
-
-
+ALLOWED_HOSTS = [socket.gethostbyname(socket.gethostname()),
+                 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,8 +42,18 @@ INSTALLED_APPS = [
     'game',
     'HMAuth',
     'skillsocket',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -101,18 +110,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+
 ]
 
 

@@ -12,12 +12,6 @@ from .serializer import DeckSerializer, CardSerializer
 def myCollection(request):
     cards = Card.objects.all()
     collection = getcollection(request.user.id)
-    newdeck = []
-
-    def addtodeck(id):
-        newdeck.append(id)
-
-        
     return render(request, 'deck.html', locals())
 
 
@@ -30,7 +24,6 @@ def deckList(request):
     elif request.method == 'POST':
         postedData = {
             'name': request.data.get('name'),
-            'description': request.data.get('description'),
             'cards': request.data.get('cards')
         }
         serializer = DeckSerializer(data=postedData)
@@ -64,4 +57,3 @@ def getcollection(user):
         collection = Card.objects.all()
     serializer = CardSerializer(collection, many=True)
     return serializer.data
-    deck
