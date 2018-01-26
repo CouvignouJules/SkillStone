@@ -40,8 +40,9 @@ class GamePlayer(models.Model):
     name = models.CharField(max_length=30, default=None)
     hp = models.IntegerField(default=30)
     hand = models.TextField(max_length=1000, default=None) # CharField max max_length = 255
-    deck = models.TextField(max_length=50000, default=None)
+    deck = models.FileField(default=None)
     board = models.TextField(max_length=1000, default=None)
+
 
     def __init__(self, name):
         super(GamePlayer, self).__init__()
@@ -126,8 +127,8 @@ class Game(models.Model):
 
             tableUser = User.objects.get(username=username)
             player = Player.objects.get(user=tableUser)
-            print(player.deckCollection)
-            gamePlayer.deck = self.deckToJson(player.deckCollection.first())
+            print(player.deckcollection)
+            gamePlayer.deck = self.deckToJson(player.deckcollection.first())
 
             gamePlayer.shuffleDeck()
 
@@ -136,7 +137,7 @@ class Game(models.Model):
                 gamePlayer.removeDeck(gamePlayer.deck['cards'][0])
 
 
-            gamePlayer.save() # TODO : fix : django.db.utils.DataError: (1406, "Data too long for column 'deck' at row 1")
+            gamePlayer.save()
             self.players.add(gamePlayer)
             self.save()
             return False

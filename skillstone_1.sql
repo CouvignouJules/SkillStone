@@ -31,9 +31,9 @@ INSERT INTO `deck_cardtype` (`id`, `name`) VALUES
 (1, 'Minion'),
 (2, 'Spell');
 
-INSERT INTO `deck_deck` (`id`, `name`, `description`) VALUES
-(1, 'fist', ''),
-(2, 'second', '');
+INSERT INTO `deck_deck` (`id`, `name`) VALUES
+(1, 'fist'),
+(2, 'second');
 
 INSERT INTO `deck_deck_cards` (`id`, `deck_id`, `card_id`) VALUES
 (1, 1, 1),

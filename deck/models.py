@@ -138,6 +138,6 @@ class PlayerAdmin(admin.ModelAdmin):
         }),
         ('deck',{
             'description': 'deck',
-            'fields': ['cardCollection', 'deckCollection']
+            'fields': ['cardcollection', 'deckcollection']
         })
     ]
