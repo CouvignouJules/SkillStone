@@ -5,7 +5,7 @@ from deck.models import Card
 from deck.models import Player
 from deck.models import Deck
 from collections import namedtuple
-from random import *
+import random as rand
 from django.contrib.auth.models import User
 import json
 
@@ -37,39 +37,120 @@ class RulesAdmin(admin.ModelAdmin):
 
 
 class GamePlayer(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, default=None)
     hp = models.IntegerField(default=30)
-    hand = models.ManyToManyField(Card, related_name='hand')
-    deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
-    board = models.ManyToManyField(Card, related_name='board')
+    hand = models.TextField(max_length=1000, default=None) # CharField max max_length = 255
+    deck = models.TextField(max_length=50000, default=None)
+    board = models.TextField(max_length=1000, default=None)
 
     def __init__(self, name):
+        super(GamePlayer, self).__init__()
+        self.name = name
         self.hp = 30 # TODO : initialiser en fonction des regles
+        self.hand = []
+        self.board = []
+
+
+    def draw(self):
+        """
+        :return: Hand is full ?
+        """
+        if self.hand.length < 10:
+            self.addHand(self.deck[0])
+            return True
+        else:
+            self.removeHand(self.deck[0])
+            return False
+
+    def addHand(self,card):
+        self.hand.append(card)
+
+    def removeHand(self, card):
+        self.hand['card'].remove(card)
+
+    def addDeck(self, card):
+        self.deck.append(card)
+
+    def removeDeck(self, card):
+        self.deck['cards'].remove(card)
+
+    def shuffleDeck(self):
+        rand.shuffle(self.deck['cards'])
+
+
+
 
 class Game(models.Model):
     players = models.ManyToManyField(GamePlayer)
 
-    def __init__(self):
-        self.addPlayer(username="toto")
-        pass
-        #GamePlayer.objects.all().delete()
+    #def __init__(self):
+    #    super(self).__init__()
+    #    GamePlayer.objects.all().delete()
+
+    def handToJson(self,cards):
+        data = {}
+        for card in cards.all():
+            data['cards'].append(Game.cardToJson(self,card))
+        return data
+
+    def deckToJson(self,deck):
+        data = {}
+        data['name'] = deck.name
+        data['description'] = deck.description
+        data['cards'] = []
+        for card in deck.cards.all():
+            data['cards'].append(Game.cardToJson(self,card))
+        return data
+
+
+    def cardToJson(self,card):
+        data = {}
+        data['name'] = card.name
+        data['img'] = str(card.img)
+        data['description'] = card.description
+        data['cost'] = card.cost
+        data['attack'] = card.attack
+        data['health'] = card.health
+        data['cardType'] = card.cardType.name
+        if card.effect != None:
+            data['effect'] = card.effect.name
+
+        return data
 
     def addPlayer(self, username):
         """
         :param username: Username of the player
-        :return: True if game wasn't full, false if it was full
+        :return: Game is full ?
         """
         if self.players.count() < 2:
-            s = GamePlayer(name=username)
-            tableUser = User.objects.filter(username=username)
-            player = Player.objects.filter(user=tableUser)
-            s.deck = player.deckCollection.first()
-            for i in range(0, 5):
-                s.hand.add(s.deck.cards[random.uniform(0, s.deck.cards.length)])
+            gamePlayer = GamePlayer(name=username)
+
+            tableUser = User.objects.get(username=username)
+            player = Player.objects.get(user=tableUser)
+            print(player.deckCollection)
+            gamePlayer.deck = self.deckToJson(player.deckCollection.first())
+
+            gamePlayer.shuffleDeck()
+
+            for i in range(0, 5):  # Initialisation de la main du joueur
+                gamePlayer.addHand(gamePlayer.deck['cards'][0])
+                gamePlayer.removeDeck(gamePlayer.deck['cards'][0])
+
+
+            gamePlayer.save() # TODO : fix : django.db.utils.DataError: (1406, "Data too long for column 'deck' at row 1")
+            self.players.add(gamePlayer)
             self.save()
-            return True
-        else:
             return False
+        else:
+            return True
+
+
+    def removePlayer(self, username):
+        """
+        :param username:
+        :return:
+        """
+        self.players.get(name=username).remove()
 
     def attack(self, username, c1, c2):
         """
@@ -86,8 +167,8 @@ class Game(models.Model):
         data['gameFinished'] = False
 
 
-        p1 = self.players.objects.filter(name=username)
-        p2 = self.players.objects.filter().exclude(name=username)
+        p1 = self.players.get(name=username)
+        p2 = self.players.get().exclude(name=username)
 
         card1 = p1.board.objects.get(c1)
         card2 = p2.board.objects.get(c2)
@@ -126,20 +207,15 @@ class Game(models.Model):
         """
         :param username: Username of the drawer
         :param number: Amount of cards drawed
-        :return: Hand == full ?
+        :return: Hand is full ?
         """
 
         handIsFull = False
 
-        p = self.players.objects.filter(name=username)
+        player = self.players.get(name=username)
 
         for i in range(0, number):
-            indexRandCard = random.uniform(0, p.deck.length)
-            if p.hand.length < 10:
-                p.hand.add(p.deck[indexRandCard])
-            else:
-                p.deck.remove(indexRandCard)
-                handIsFull = True
+            handIsFull = player.draw()
 
         self.save()
 

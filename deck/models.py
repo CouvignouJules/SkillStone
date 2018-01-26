@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import json
 
 
 class CardType(models.Model):
@@ -54,6 +55,8 @@ class Card(models.Model):
         return self.name + str(self.cost)
 
 
+
+
 class CardAdmin(admin.ModelAdmin):
     list_display = ['name', 'description', 'cost', 'attack', 'health']
     search_fields = ['effect', 'cardType']
@@ -78,6 +81,7 @@ class Deck(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 class DeckAdmin(admin.ModelAdmin):

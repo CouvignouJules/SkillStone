@@ -25,7 +25,7 @@ def ws_message(message):
 		if obj['action'] == 'join':
 			# Que faire niveau backend ?
 			if game == None:
-				game = Game()
+				game = Game.objects.create()
 			obj['gameIsFull'] = game.addPlayer(obj['username'])
 			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
 
@@ -40,6 +40,8 @@ def ws_message(message):
 			game.attack(obj['username'],obj['attackingCard'],obj['target'])
 			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
 
+		elif obj['action'] == 'disconnect':
+			game.removePlayer(obj['username'])
 
 		# Modification des points de vie de un tel
 		# Vérification de fin de partie ou non
@@ -53,5 +55,5 @@ def ws_disconnect(message):
 	# TODO: prévoir la suppression de la game quelque part
 	# Game.objects.all().delete()
 
-	# TODO: prévoir
+
 	Group("player").discard(message.reply_channel)

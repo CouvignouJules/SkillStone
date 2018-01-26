@@ -54,6 +54,15 @@ socket.onmessage = function(e) {
 
 };
 
+
+socket.onclose = function(e) {
+	data = {
+		"action": "disconnect",
+		"username": document.getElementById('user').innerHTML,
+	};
+	socket.send(JSON.stringify(data));
+};
+
 function draw(number){
 	console.log("draw");
 
