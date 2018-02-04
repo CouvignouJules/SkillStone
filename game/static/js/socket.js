@@ -23,11 +23,15 @@ socket.onmessage = function(e) {
         if (result["action"] != null) {
             switch (result["action"]) {
 				case "join":
-					if(result["username"] != document.getElementById('user').innerHTML) {
-                        // Connexion d'un joueur, animation en JS ?
-                        console.log("Bienvenue " + result["username"]); // debug ..
+					if (result["gameIsFull"]) {
+                        console.log("Game is full");
                     }
-                    result["gameIsFull"] ? console.log("Game is full") : console.log(" OKKK ")
+                    else {
+                        if (result["username"] != document.getElementById('user').innerHTML) {
+                            // Connexion d'un joueur, animation en JS ?
+                            console.log("Bienvenue " + result["username"]); // debug ..
+                        }
+                    }
 					break;
 
                 case "draw":

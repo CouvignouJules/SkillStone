@@ -39,9 +39,9 @@ class RulesAdmin(admin.ModelAdmin):
 class GamePlayer(models.Model):
     name = models.CharField(max_length=30, default=None)
     hp = models.IntegerField(default=30)
-    hand = models.TextField(max_length=1000, default=None) # CharField max max_length = 255
-    deck = models.FileField(default=None)
-    board = models.TextField(max_length=1000, default=None)
+    hand = models.TextField(default=None)
+    deck = models.TextField(default=None)
+    board = models.TextField(default=None)
 
 
     def __init__(self, name):
@@ -77,7 +77,6 @@ class GamePlayer(models.Model):
 
     def shuffleDeck(self):
         rand.shuffle(self.deck['cards'])
-
 
 
 
@@ -117,32 +116,43 @@ class Game(models.Model):
 
         return data
 
+
+
     def addPlayer(self, username):
         """
         :param username: Username of the player
         :return: Game is full ?
         """
-        if self.players.count() < 2:
-            gamePlayer = GamePlayer(name=username)
+        #if self.players.count() < 2: #TODO : à décommenter pour limiter la partie à 2 joueurs
+        gamePlayer = GamePlayer(name=username)
 
-            tableUser = User.objects.get(username=username)
-            player = Player.objects.get(user=tableUser)
-            print(player.deckcollection)
+        tableUser = User.objects.get(username=username)
+        player = Player.objects.get(user=tableUser)
+        if(player.deckcollection.first() == None):
+            print("Ce joueur n'a aucun deck") # TODO : Prévoir l'accés impossible à la partie si on a pas de deck ...
+        else:
             gamePlayer.deck = self.deckToJson(player.deckcollection.first())
-
             gamePlayer.shuffleDeck()
 
-            for i in range(0, 5):  # Initialisation de la main du joueur
-                gamePlayer.addHand(gamePlayer.deck['cards'][0])
-                gamePlayer.removeDeck(gamePlayer.deck['cards'][0])
 
 
-            gamePlayer.save()
-            self.players.add(gamePlayer)
-            self.save()
-            return False
-        else:
-            return True
+        for i in range(0, 5):  # Initialisation de la main du joueur
+            gamePlayer.addHand(gamePlayer.deck['cards'][0])
+            gamePlayer.removeDeck(gamePlayer.deck['cards'][0])
+
+        # Besoin de remettre en string pour passer dans la bdd
+        gamePlayer.deck = str(gamePlayer.deck)
+        gamePlayer.hand = str(gamePlayer.hand)
+        gamePlayer.board = str(gamePlayer.board)
+
+        gamePlayer.save()
+
+        self.players.add(gamePlayer)
+        print("Nombre de joueurs : " + self.players.count())
+        self.save()
+        return False
+        #else:
+        #    return True
 
 
     def removePlayer(self, username):
@@ -212,7 +222,10 @@ class Game(models.Model):
 
         handIsFull = False
 
-        player = self.players.get(name=username)
+        #print(self.players)
+
+        player = self.players.get(name=username) # TODO : Fix : impossible de récup les players alors que le nombre
+                                                 # s'incrémente ...
 
         for i in range(0, number):
             handIsFull = player.draw()
