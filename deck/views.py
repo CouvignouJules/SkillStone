@@ -11,7 +11,7 @@ from .serializer import DeckSerializer, CardSerializer
 @login_required
 def myCollection(request):
     cards = Card.objects.all()
-    collection = getcollection(request.user.id)
+    cardCollection = getcollection(request.user.id)
     return render(request, 'deck.html', locals())
 
 
