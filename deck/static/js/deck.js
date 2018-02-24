@@ -42,8 +42,8 @@ $( document ).ready(function() {
             url: "http://localhost:8000/mydeck/deck",
             dataType: "json",
             headers: {
-                "Authorization": token ,
-                'X-CSRFToken': csrftoken,
+                "Authorization": 'Token '+token,
+                "X-CSRFToken": csrftoken,
                 "Content-Type":'application/json'
             },
             data : data,

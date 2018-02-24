@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from django.contrib.auth.decorators import login_required
+from rest_framework.authtoken.models import Token
 from django.shortcuts import render
 from .models import Deck, Card
 from .serializer import DeckSerializer, CardSerializer
@@ -10,6 +11,7 @@ from .serializer import DeckSerializer, CardSerializer
 
 @login_required
 def myCollection(request):
+    token = request.user.auth_token
     cards = Card.objects.all()
     cardCollection = getcollection(request.user.id)
     return render(request, 'deck.html', locals())
