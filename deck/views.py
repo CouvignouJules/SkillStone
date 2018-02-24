@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 
-import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Deck, Card
@@ -12,6 +12,8 @@ from .serializer import DeckSerializer, CardSerializer
 @login_required
 def myCollection(request):
     token = request.user.auth_token
+
+    carddeck = getDeckCardd(17)
 
     cards = getCardCollection()
     cardCollection = getCardCollection(request.user.id)
@@ -73,4 +75,18 @@ def getDeckCollection(user=None):
     else:
         collection = Deck.objects.all()
     serializer = DeckSerializer(collection, many=True)
+    return serializer.data
+
+
+@api_view(['GET'])
+def deckCards(request, id=None):
+    return Response(getDeckCardd(id))
+
+
+def getDeckCardd(id=None):
+    if id:
+        collection = Card.objects.raw('SELECT * FROM `deck_card` LEFT JOIN deck_deck_cards ON deck_card.id = deck_deck_cards.card_id WHERE (deck_deck_cards.deck_id = %s)',[id])
+    else:
+        collection = Card.objects.all()
+    serializer = CardSerializer(collection, many=True)
     return serializer.data

@@ -10,5 +10,7 @@ urlpatterns = [
     url(r'^/cardCollection/(?P<user>[0-9]+)$', views.cardCollection),
     url(r'^/deckCollection$', views.deckCollection),
     url(r'^/deckCollection/(?P<user>[0-9]+)$', views.deckCollection),
+    url(r'^/deckCards$', views.deckCards),
+    url(r'^/deckCards/(?P<id>[0-9]+)$', views.deckCards),
     url(r'^/authenticate$', apiViews.obtain_auth_token)
 ]
