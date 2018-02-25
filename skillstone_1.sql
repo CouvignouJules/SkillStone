@@ -13,26 +13,26 @@ INSERT INTO `deck_card` (`
 id`,
 `name
 `, `description`, `cost`, `attack`, `health`, `cardType_id`, `effect_id`, `img`) VALUES
-(1, 'Boule de feu', 'Inflige 6 points de dégâts.', 6, 6, 0, 2, NULL, 'static/img/card/Boule_de_feu.jpg'),
+(1, 'Boule de feu', 'Inflige 6 points de dégâts.', 4, 6, 0, 2, NULL, 'static/img/card/Boule_de_feu.jpg'),
 (2, 'Cobra empereur', 'Toxicité', 3, 2, 3, 1, 3, 'static/img/card/Cobra_empereur.jpg'),
 (3, 'Feu follet', 'Ne fait rien', 0, 1, 1, 1, NULL, 'static/img/card/Feu_follet.jpg'),
 (4, 'Rampant des tourbières', 'Provocation', 5, 3, 6, 1, 2, 'static/img/card/Rampant_des_tourbières.jpg'),
 (5, 'Tigre de Strangleronce', 'Camouflage', 5, 5, 5, 1, 1, 'static/img/card/Tigre_de_Strangleronce.jpg'),
-(6, 'Boule de feu', 'Inflige 6 points de dégâts.', 6, 6, 0, 2, NULL, 'static/img/card/Boule_de_feu.jpg'),
-(7, 'Cobra empereur', 'Toxicité', 3, 2, 3, 1, 3, 'static/img/card/Cobra_empereur.jpg'),
-(8, 'Feu follet', 'Ne fait rien', 0, 1, 1, 1, NULL, 'static/img/card/Feu_follet.jpg'),
-(9, 'Rampant des tourbières', 'Provocation', 5, 3, 6, 1, 2, 'static/img/card/Rampant_des_tourbières.jpg'),
-(10, 'Tigre de Strangleronce', 'Camouflage', 5, 5, 5, 1, 1, 'static/img/card/Tigre_de_Strangleronce.jpg'),
-(11, 'Boule de feu', 'Inflige 6 points de dégâts.', 6, 6, 0, 2, NULL, 'static/img/card/Boule_de_feu.jpg'),
-(12, 'Cobra empereur', 'Toxicité', 3, 2, 3, 1, 3, 'static/img/card/Cobra_empereur.jpg'),
-(13, 'Feu follet', 'Ne fait rien', 0, 1, 1, 1, NULL, 'static/img/card/Feu_follet.jpg'),
-(14, 'Rampant des tourbières', 'Provocation', 5, 3, 6, 1, 2, 'static/img/card/Rampant_des_tourbières.jpg'),
-(15, 'Tigre de Strangleronce', 'Camouflage', 5, 5, 5, 1, 1, 'static/img/card/Tigre_de_Strangleronce.jpg'),
-(16, 'Boule de feu', 'Inflige 6 points de dégâts.', 6, 6, 0, 2, NULL, 'static/img/card/Boule_de_feu.jpg'),
-(17, 'Cobra empereur', 'Toxicité', 3, 2, 3, 1, 3, 'static/img/card/Cobra_empereur.jpg'),
-(18, 'Feu follet', 'Ne fait rien', 0, 1, 1, 1, NULL, 'static/img/card/Feu_follet.jpg'),
-(19, 'Rampant des tourbières', 'Provocation', 5, 3, 6, 1, 2, 'static/img/card/Rampant_des_tourbières.jpg'),
-(20, 'Tigre de Strangleronce', 'Camouflage', 5, 5, 5, 1, 1, 'static/img/card/Tigre_de_Strangleronce.jpg');
+(6, 'Consécration', 'Inflige 2 points de dégâts à tous les adversaires.', 4, 2, 0, 2, NULL, 'static/img/card/Consecration.jpg'),
+(7, 'Crocilisque des rivières', 'Ne fait rien', 2, 2, 3, 1, NULL, 'static/img/card/Crocilisque_des_rivieres'),
+(8, 'Diablotin des flammes', 'Cri de guerre : Inflige 3 points de dégâts à votre héros.', 1, 3, 2, 1, 4, 'static/img/card/Diablotin_des_flammes.jpg'),
+(9, 'Défenseur d Argus ', 'Cri de guerre : donne aux serviteurs adjacents +1 / +1 et Provocation.', 4, 2, 3, 1, 4, 'static/img/card/Defenseur_d_Argus.jpg'),
+(10, 'Éclair', 'Inflige 3 points de dégâts', 1, 3, 0, 2, NULL, 'static/img/card/Eclair.jpg'),
+(11, 'Exécution', 'Détruit un serviteur blessé.', 2, 0, 0, 2, NULL, 'static/img/card/Execution.jpg'),
+(12, 'Gardien mogu shan', 'Provocation', 4, 1, 7, 1, 2, 'static/img/card/Gardien_mogushan.jpg'),
+(13, 'Imposition des mains', 'Rend 8 points de vie. Vous piochez 3 cartes', 8, 0, 0, 2, NULL, 'static/img/card/Imposition_des_mains.jpg'),
+(14, 'Intelligence des Arcanes', 'Vous piochez 2 cartes.', 3, 0, 0, 2, NULL, 'static/img/card/Intelligence_des_arcanes.jpg'),
+(15, 'Massacreur du temple', 'Cri de guerre :  donne +3 PV à un serviteur allié.', 6, 6, 6, 1, 4, 'static/img/card/Massacreur_du_temple.jpg'),
+(16, 'Prêtresse d Élune', 'Cri de guerre : rend 4 points de vie à votre héros.', 6, 5, 4, 1, 4, 'static/img/card/Pretresse_d_Elune.jpg'),
+(17, 'Sanglier Brocheroc', 'Charge', 1, 1, 1, 1, 6, 'static/img/card/Sanglier_brocheroc.jpg'),
+(18, 'Seigneur de l arène', 'Provocation', 6, 6, 5, 1, 2, 'static/img/card/Seigneur_de_l_arene.jpg'),
+(19, 'Sylvanas Coursevent', 'Râle d agonie : prend le contrôle d un serviteur adverse aléatoire', 6, 5, 5, 1, 5, 'static/img/card/Waifu.jpg'),
+(20, 'Yéti noroît', 'Ne fait rien', 4, 4, 5, 1, NULL, 'static/img/card/Yeti_noroit.jpg');
 
 INSERT INTO `deck_cardtype` (`
 id`,
@@ -82,7 +82,10 @@ id`,
 `) VALUES
 (1, 'Camouflage'),
 (2, 'Provocation'),
-(3, 'Toxicité');
+(3, 'Toxicité'),
+(4, 'Cri de guerre'),
+(5, "Râle d'agonie"),
+(6, "Charge")
 
 INSERT INTO `deck_player` (`
 id`,
