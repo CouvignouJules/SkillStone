@@ -91,6 +91,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1491">
               <caret line="89" column="23" lean-forward="false" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
+          	</state>
             <state relative-caret-position="884">
               <caret line="62" column="66" lean-forward="false" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
               <folding />
@@ -105,6 +106,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="833">
               <caret line="49" column="26" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+          	</state>
             <state relative-caret-position="567">
               <caret line="27" column="80" lean-forward="false" selection-start-line="27" selection-start-column="80" selection-end-line="27" selection-end-column="80" />
               <folding />
@@ -112,8 +114,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game/templates/game.html">
+      <file leaf-file-name="game.html" pinned="false" current-in-tab="false"></file>
+        <entry file="file://$PROJECT_DIR$/game/templates/game.html"></entry>
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SkillStone/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -126,6 +128,7 @@
           </provider>
         </entry>
       </file>
+      <leaf>
       <file leaf-file-name="routing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/skillsocket/routing.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -134,9 +137,9 @@
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
+            </state>
             <state relative-caret-position="34">
               <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
