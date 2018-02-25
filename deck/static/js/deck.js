@@ -6,13 +6,13 @@ $( document ).ready(function() {
     token = document.getElementById("token").innerHTML;
     csrftoken = getCookie('csrftoken');
 
-    $(".card").click(function () {
+    $(".card").on('click', function () {
         deck.push(parseInt(this.id));
         $('#newdeck').append("<tr><td class='newDeckCard' id="+this.id+">"+this.innerHTML+"</td></tr>")
     });
 
-    $("#senddeck").click(function () {
-        var nom = document.getElementById("nomdeck").value;
+    $("#senddeck").on('click', function () {
+        var nom = $('#nomdeck').val();
         var jsondeck = JSON.stringify(deck);
         var data = "{\"name\":\""+nom+"\",\"cards\":"+jsondeck+"}";
 
@@ -28,23 +28,23 @@ $( document ).ready(function() {
             data : data,
             success: function (msg) {
                 console.log('Success!',msg)
+                window.location.reload()
             },
             error : function(err) {
                 console.log('Error!', err)
-            },
+            }
         });
-        window.location.reload()
-    })
+    });
 
-    $(".deck").click(function () {
-        getdeck(this.id,function (data) {
+    $(".deck").on('click', (function () {
+        getDeck(this.id,function (data) {
             $('#deck').empty()
             data.forEach(function(element) {
                 console.log(element.name);
                 $('#deck').append("<tr><td class='deckCard' id="+element.id+">"+element.name+"</td></tr>")
             });
-        })
-    })
+        });
+    }));
 });
 
 function getCookie(name) {
@@ -63,22 +63,22 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function getdeck(id,callback) {
+function getDeck(id,callback) {
     $.ajax({
-            type: "GET",
-            url: "http://localhost:8000/mydeck/deckCards/"+id,
-            dataType: "json",
-            headers: {
-                "Authorization": 'Token '+token,
-                "X-CSRFToken": csrftoken,
-                "Content-Type":'application/json'
-            },
-            success: function (data) {
-                console.log('Success!',data)
-                callback(data)
-            },
-            error : function(err) {
-                console.log('Error!', err)
-            },
-        });
+        type: "GET",
+        url: "http://localhost:8000/mydeck/deckCards/"+id,
+        dataType: "json",
+        headers: {
+            "Authorization": 'Token '+token,
+            "X-CSRFToken": csrftoken,
+            "Content-Type":'application/json'
+        },
+        success: function (data) {
+            console.log('Success!',data)
+            callback(data)
+        },
+        error : function(err) {
+            console.log('Error!', err)
+        },
+    });
 }
