@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href={% static "css/w3.css" %}>
 <link rel="stylesheet" type="text/css" href={% static "css/profile.css" %}>
+<link rel="stylesheet" type="text/css" href={% static "css/deck.css" %}>
 
 <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static "js/deck.js" %}"></script>
@@ -30,46 +31,50 @@
 </div>
 
 <!-- Header -->
+<span id="token" style="display: none">{{ token }}</span>
 <header class="w3-container w3-red w3-center" style="padding:128px 16px">
-    <span id="token" style="display: none">{{ token }}</span>
-    <h2 class="w3-margin w3-jumbo">Mon deck</h2>
+  <!-- Left -->
     <div id="cardCollection" style="text-align: center">
-        <h3>collection de carte</h3>
-        <table>
+      <h3>Choisis tes cartes !</h3>
+      <div class="gallery">
         {% for myCards in cardCollection %}
             {% for card in cards %}
                 {% if myCards.name == card.name %}
-                    <tr>
-                        <td class="card" id="{{ card.id }}">{{ card.name }}</td>
-                    </tr>
+                    <div class="card" id="{{ card.id }}"><img src="{{ card.img }}" title="{{ card.name }}" style="width: 200px; height: 290px;"/></div>
                 {% endif %}
             {% endfor %}
         {% endfor %}
-        </table>
-    </div>
-    <input type="button" id="creation" value="nouveau deck">
-    <div id="creationHandler">
-
+      </div>
     </div>
 
-
-    <div id="deckCollection" style="text-align: center">
-        <h3>collection de deck</h3>
-        <table>
+    <!-- Right -->
+    <div id="newCardCollection">
+        <input type="text" id="nomdeck" placeholder="Entre le nom du Deck !" value="Nouveau Deck">
+        <select class="w3-button w3-black w3-padding-large w3-large w3-margin-top" id="select-deck">
+          <option id="select-newdeck" value="">Nouveau deck</option>
             {% for mydecks in deckCollection %}
                 {% for deck in decks %}
                     {% if mydecks.name == deck.name %}
-                        <tr>
-                            <td class="deck" id="{{ deck.id }}">{{ deck.name }}</td>
-                        </tr>
+                      <option class="deck" id="{{ deck.id }}" value="{{ deck.id }}">{{ deck.name }}</option>
                     {% endif %}
                 {% endfor %}
             {% endfor %}
-        </table>
+        </select>
+        <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="senddeck" value="Créer le deck !">
+        <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="modifDeck" value="Modifier le deck !" style="display: none;">
+        <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="suprDeck" value="Supprimer le deck !" style="display: none;">
+        <div class="gallery" id="newdeck">
+          <!-- Selected cards will go there -->
+        </div>
     </div>
-    <div id="modifHandler">
 
-    </div>
+    <!--<div id="modifDeck">
+        <span id="deckId"></span>
+        <input type="text" id="nomdeckmodif" placeholder="Suppression">
+        <table id="deck">
+
+        </table>
+    </div>-->
 </header>
 
 

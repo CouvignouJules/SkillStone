@@ -3,15 +3,16 @@ var token;
 var csrftoken;
 
 $( document ).ready(function() {
+    $('#nomdeck').val("Nouveau Deck");
     token = document.getElementById("token").innerHTML;
     csrftoken = getCookie('csrftoken');
 
     $(".card").on('click', function () {
         deck.push(parseInt(this.id));
-        $('#newdeck').append("<tr><td class='newDeckCard' id="+this.id+">"+this.innerHTML+"</td></tr>")
+        $('#newdeck').append("<div class='newDeckCard' id="+this.id+">"+this.innerHTML+"</div>")
     });
 
-    $(document).on('click', "#senddeck",function () {
+    $("#senddeck").on('click', function () {
         var nom = $('#nomdeck').val();
         var jsondeck = JSON.stringify(deck);
         var data = "{\"name\":\""+nom+"\",\"cards\":"+jsondeck+"}";
@@ -36,46 +37,27 @@ $( document ).ready(function() {
         });
     });
 
-    $(".deck").on('click', (function () {
-        $('#modifHandler').empty();
-        $('#modifHandler').append("<div id=\"modifForm\">\n" +
-            "            <span id=\"deckId\"></span>\n" +
-            "            <input type=\"text\" id=\"nomdeckmodif\" placeholder=\"supr\">\n" +
-            "            <table id=\"deck\">\n" +
-            "\n" +
-            "            </table>\n" +
-            "            <input type=\"button\" id=\"modifDeck\" value=\"modifier le deck\">\n" +
-            "            <input type=\"button\" id=\"suprDeck\" value=\"suprimer le deck\">\n" +
-            "            <input type=\"button\" id=\"annulermodif\" value=\"annuler\">\n" +
-            "        </div>")
-        getDeck(this.id,function (data) {
-            $('#deck').empty()
+    $("#select-deck").on('change', function() {
+      if($("#select-deck").val() == "") {
+        $("#modifDeck").hide();
+        $("#suprDeck").hide();
+        $("#senddeck").show();
+        $('#nomdeck').val("Nouveau Deck");
+        $('#newdeck').empty()
+      } else {
+        $("#modifDeck").show();
+        $("#suprDeck").show();
+        $("#senddeck").hide();
+        getDeck($("#select-deck").val(),function (data) {
+            $('#newdeck').empty()
+            $('#nomdeck').val($("#select-deck option:selected").text());
             data.forEach(function(element) {
                 console.log(element.name);
-                $('#deck').append("<tr><td class='deckCard' id="+element.id+">"+element.name+"</td></tr>")
+                $('#newdeck').append("<div class='deckCard' id="+element.id+"><img title='"+element.name+"' src='"+element.img+"' style='width: 200px; height: 290px;' /></div>")
             });
         });
-    }));
-
-    $(document).on('click', "#annulermodif",function () {
-        $("#modifHandler").empty();
-    })
-
-    $("#creation").on('click', function () {
-        $("#creation").hide();
-        $("#creationHandler").append("<div id=\"creationForm\"><input type=\"text\" id=\"nomdeck\" placeholder=\"nom du deck\">\n" +
-            "        <table id=\"newdeck\">\n" +
-            "\n" +
-            "        </table>\n" +
-            "        <input type=\"button\" id=\"senddeck\" value=\"crée le deck\">"+
-            "        <input type=\"button\" id=\"annulerCrea\" value=\"annuler\"></div>");
-    })
-
-    $(document).on('click', "#annulerCrea",function () {
-        $("#creation").show();
-        $("#creationHandler").empty();
-    })
-
+      }
+    });
 });
 
 function getCookie(name) {
