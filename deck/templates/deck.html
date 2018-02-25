@@ -47,13 +47,12 @@
         {% endfor %}
         </table>
     </div>
-    <div>
-        <input type="text" id="nomdeck" placeholder="nom du deck">
-        <table id="newdeck">
+    <input type="button" id="creation" value="nouveau deck">
+    <div id="creationHandler">
 
-        </table>
-        <input type="button" id="senddeck" value="crée le deck">
     </div>
+
+
     <div id="deckCollection" style="text-align: center">
         <h3>collection de deck</h3>
         <table>
@@ -68,14 +67,8 @@
             {% endfor %}
         </table>
     </div>
-    <div id="modifDeck">
-        <span id="deckId"></span>
-        <input type="text" id="nomdeckmodif" placeholder="supr">
-        <table id="deck">
+    <div id="modifHandler">
 
-        </table>
-        <input type="button" id="modifDeck" value="modifier le deck">
-        <input type="button" id="suprDeck" value="suprimer le deck">
     </div>
 </header>
 
