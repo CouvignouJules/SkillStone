@@ -96,7 +96,7 @@ def cardToJson(card):
 	data['cost'] = card.cost
 	data['attack'] = card.attack
 	data['health'] = card.health
-	data['cardType'] = card.cardType.name
+	data['cardtype'] = card.cardtype.name
 	if card.effect != None:
 		data['effect'] = card.effect.name
 
@@ -252,8 +252,7 @@ def playerDraw(game, username):
 	data = GamePlayerSerializer(player, many=True).data
 
 	data = json.dumps(data)
-	# TODO : Impossible de convertir en json
-	print(data.replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('"',"'"))
+	data.replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('"',"'").replace('\\','')
 	item_dict = json.loads(data)
 
 	#for item in item_dict[0]:
