@@ -49,15 +49,16 @@ class GamePlayer(models.Model):
 
     def __init__(self, name):
         super(GamePlayer, self).__init__()
-        self.name = name
+        self.name = str(name)
         self.hp = 30 # TODO : initialiser en fonction des regles
         self.hand = []
         self.board = []
 
+    def __str__(self):
+        return self.name
 
-
-
-
+    def __repr__(self):
+        return self.name
 
 class Game(models.Model):
     players = models.ManyToManyField(GamePlayer)
