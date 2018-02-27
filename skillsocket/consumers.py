@@ -216,10 +216,10 @@ def draw(game, username, number):
 	print(game.players.count())
 
 	# print(Game.objects.get(id=1).players.all())
-
+	"""
 	for i in range(0, number):
 		handIsFull = playerDraw(game,username)
-
+	"""
 	game.save()
 
 	return handIsFull
@@ -244,12 +244,12 @@ def put(game,username, card):
 	game.save()
 
 	return boardIsFull
-
+"""
 
 def playerDraw(game, username):
-	"""
+	
     :return: Hand is full ?
-    """
+    
 
 	lol = GamePlayer.objects.all()
 	print("wow")
@@ -306,7 +306,7 @@ def playerDraw(game, username):
 	#lol.deck = mondeckfinale
 	#lol.save()
 
-	"""
+	
 	requetemain = "UPDATE game_gameplayer SET hand = "+"\""+mamainfinale+"\""+"WHERE name = "+"\""+username+"\""
 	print(requetemain)
 	requetedeck = "UPDATE game_gameplayer SET deck = "+"\""+mondeckfinale+"\""+"WHERE name = "+"\""+username+"\""

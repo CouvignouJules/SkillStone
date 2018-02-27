@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^/cardCollection/(?P<user>[0-9]+)$', views.cardCollection),
     url(r'^/deckCollection$', views.deckCollection),
     url(r'^/deckCollection/(?P<user>[0-9]+)$', views.deckCollection),
-    url(r'^/card$', views.getCard),
+    url(r'^/card/$', views.getCard),
     url(r'^/card/(?P<id>[0-9]+)$', views.getCard),
     url(r'^/deckCards$', views.deckCards),
     url(r'^/deckCards/(?P<id>[0-9]+)$', views.deckCards),

@@ -3,6 +3,7 @@
 <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script src={% static "bataille/js/bataille.js" %}></script>
 <script src={% static "js/socket.js" %}></script>
+<script src={% static "js/game.js" %}></script>
 
 <head>
     <title>Skillstone - En partie</title>
@@ -57,4 +58,11 @@
 
     </div>
     <div id="message-bataille"><span id="message-rotation"></span></div>
+
+<!----------------------------------- parametre pour le JS ---------------------------------------------------->
+    <span id="token" style="display: none">{{ token }}</span>
+    <input id="deckId" type="input" value="1">
+
+
+
 </body>

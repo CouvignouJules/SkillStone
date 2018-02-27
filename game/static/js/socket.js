@@ -78,10 +78,6 @@ function draw(number){
 		};
 		socket.send(JSON.stringify(data));
 	}
-
-
-
-
 }
 
 function put(card){
