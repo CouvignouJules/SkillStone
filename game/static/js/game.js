@@ -21,6 +21,7 @@ $( document ).ready(function() {
         myDeck = shuffle(myDeck)
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i])
+            /* ajouter la div de la carte dans la main */
             delete myDeck[i];
         }
         myDeck = cleanArray(myDeck);
@@ -56,17 +57,21 @@ function getDeck(callback, id="") {
 
 function PutCard(id) {
     myBoard.push(myHand[id]);
+    /* ajouter la div de la carte sur le board */
     delete myHand[id];
     myHand = cleanArray(myHand)
 }
 
 function draw(){
     myHand.push(myDeck[0]);
+    /* ajouter la div de la carte dans la main */
     delete myDeck[0];
     myDeck = cleanArray(myDeck)
 }
 
-
+function attaquer( attaquant, attaquer) {
+    oponentBoard[attaquer].health = oponentBoard[attaquer].health - myBoard[attaquant].attack
+}
 
 
 function getCard(callback, id="") {
