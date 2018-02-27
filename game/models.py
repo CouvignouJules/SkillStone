@@ -1,118 +1,67 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib import admin
+from deck.models import Card
+from deck.models import Player
+from deck.models import Deck
+from django.contrib.auth.models import User
 
 
-class CardType(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30)
+
+class Rules(models.Model):
+    playersHP = models.IntegerField(default=30)     # Nombre de points de vie de chaque joueur
+    startingHand = models.IntegerField(default=3)   # Nombre de cartes dans la main du joueur au début de la game
+    spellUse = models.BooleanField(default=True)    # Autorisation d'utiliser les sorts ou non
+    monstersBoard = models.IntegerField(default=7)  # Nombre de monstres autorisés sur chaque plateau
 
 
-class CardTypeAdmin(models.Model):
-    list_display = ['name']
-    list_filter = ['name']
-    ordering = ['name']
-
-    fieldsets = (
-        (
-            'Général', {
-                'description': 'Création d\'un type de carte',
-                'fields': ['name']
-            }
-        )
-    )
-
-
-class Effect(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30)
+class RulesAdmin(admin.ModelAdmin):
+    list_display = ['playersHP', 'startingHand', 'spellUse', 'monstersBoard']
+    list_filter = ['playersHP', 'startingHand']
+    ordering = ['playersHP']
+    fieldsets = [
+        ('Players relative', {
+            'description': 'HP & hand',
+            'fields': ['playersHP', 'startingHand']
+        }),
+        ('Game relative', {
+            'description': 'Spell & monsters',
+            'fields': ['spellUse', 'monstersBoard']
+        })
+    ]
 
 
-class EffectAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    list_filter = ['name']
-    ordering = ['name']
+# TODO : TOUT TESTER
 
-    fieldsets = (
-        (
-            'Général', {
-                'description': 'Création d\'un effet',
-                'fields': ['name']
-            }
-        )
-    )
-
-
-class Card(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30)
-    description = models.CharField(max_length=100)
-    cost = models.IntegerField()
-    attack = models.IntegerField()
-    health = models.IntegerField()
-    cardType = models.ForeignKey(CardType, on_delete=models.CASCADE)
-    effect = models.ManyToManyField(Effect)
+"""
+Partie déroulement du jeu.
+Les données sont stockées en json dans la base de données pour le déroulement du jeu car cela modifierai sinon les
+données existante et fixe, par example quand une carte perd de la vie.
+Tables temporaire pour la durée de la partie évidemment.
+"""
+class GamePlayer(models.Model):
+    name = models.CharField(max_length=30, default=None)
+    hp = models.IntegerField(default=30)
+    hand = models.TextField(default=None)
+    deck = models.TextField(default=None)
+    board = models.TextField(default=None)
 
 
-class CardAdmin(admin.ModelAdmin):
-    list_display = ['name', 'cost', 'attack', 'health', 'cardType', 'effect']
-    list_filter = ['name', 'cost', 'attack', 'health', 'cardType']
-    ordering = ['id']
+    def __init__(self, name):
+        super(GamePlayer, self).__init__()
+        self.name = str(name)
+        self.hp = 30 # TODO : initialiser en fonction des regles
+        self.hand = []
+        self.board = []
 
-    fieldsets = (
-        (
-            'Mise en forme', {
-                'description': 'Réglages communs',
-                'fields': ['name', 'cost', 'cardType', 'description']
-            }
-        ),
-        (
-            'Spécificité monstre', {
-                'description': 'Création d\'une carte monstre',
-                'fields': ['attack', 'health', 'effect']
-            }
-        ),
-        (
-            'Spécificité sort', {
-                'description': 'Création d\'une carte sort',
-                'fields': ['effect']
-            }
-        )
-    )
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
+class Game(models.Model):
+    players = models.ManyToManyField(GamePlayer)
 
 
-class Player(models.Model):
-    pseudo = models.CharField(max_length=30)
-    life = models.IntegerField(default=30)
-    hand = models.ManyToManyField(Card, related_name='hand')
-    deck = models.ManyToManyField(Card, related_name='deck')
 
-    def setLife(self, life):
-        self.life = life
-
-    def setPseudo(self, pseudo):
-        if pseudo.length() > 0:
-            self.pseudo = pseudo
-
-    def addCardToHand(self, card):
-        if hand.count() < 11:
-            self.hand.add(card)
-
-    def addCardToDeck(self, card):
-        if deck.count() < 31:
-            self.deck.add(card)
-
-
-class PlayerAdmin(admin.ModelAdmin):
-    list_display = ['pseudo', 'life', 'hand', 'deck']
-    list_filter = ['pseudo', 'life']
-    ordering = ['pseudo']
-
-    fieldsets = (
-        (
-            'Création d\'un joueur', {
-                'description': 'Données du joueur',
-                'fields': ['pseudo', 'life', 'hand', 'deck']
-            }
-        )
-    )
-# Create your models here.

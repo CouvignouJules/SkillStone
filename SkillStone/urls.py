@@ -17,22 +17,19 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from HMAuth import views as hmauth_views
-from deck import views as deck_views
 from game import views as game_views
 from SkillStone import views as skill_views
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
-    url(r'^$', hmauth_views.home, name='home'),
-    url(r'^login/$', auth_views.login,
-        {'template_name': 'login.html'}, name='login'),
-    url(r'^logout/$', auth_views.logout,
-        {'next_page': 'login'}, name='logout'),
+    url(r'^$', RedirectView.as_view(url='login/'), name='home'),
+    url(r'^login/$', auth_views.login,{'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout,{'next_page': 'login'}, name='logout'),
     url(r'^signup/$', hmauth_views.signup, name='signup'),
     url(r'^accounts/profile/$', skill_views.profile, name='profile'),
-    url(r'^deck/$', deck_views.deck, name='deck'),
+    url(r'^mydeck', include('deck.urls')),
     url(r'^game/$', game_views.game, name='game'),
     url(r'^admin/', admin.site.urls),
     url(r'^ws/', include('skillsocket.urls')),
-
 ]
