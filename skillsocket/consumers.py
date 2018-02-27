@@ -6,10 +6,14 @@ from django.contrib import admin
 from deck.models import Card
 from deck.models import Player
 from deck.models import Deck
+from collections import OrderedDict
+import json
 import random as rand
 from django.contrib.auth.models import User
 from game.serializer import GamePlayerSerializer, GameSerializer
 from collections import OrderedDict
+from django.core.exceptions import ObjectDoesNotExist
+
 
 import json
 
@@ -96,7 +100,7 @@ def cardToJson(card):
 	data['cost'] = card.cost
 	data['attack'] = card.attack
 	data['health'] = card.health
-	data['cardType'] = card.cardType.name
+	data['cardtype'] = card.cardtype.name
 	if card.effect != None:
 		data['effect'] = card.effect.name
 
@@ -132,7 +136,7 @@ def addPlayer(game, username):
 	gamePlayer.save()
 
 	game.players.add(gamePlayer)
-	print("Nombre de joueurs : ");
+	print("Nombre de joueurs : ")
 	print(game.players.count())
 	game.save()
 	return False
@@ -247,14 +251,69 @@ def playerDraw(game, username):
     :return: Hand is full ?
     """
 
+	lol = GamePlayer.objects.all()
+	print("wow")
+
 	player = Game.objects.raw(
 		'SELECT * FROM game_game_players ps,game_gameplayer p where ps.id = p.id AND name = %s limit 1', [username])
 	data = GamePlayerSerializer(player, many=True).data
+	print(data)
 
 	data = json.dumps(data)
-	# TODO : Impossible de convertir en json
-	print(data.replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('"',"'"))
+	data.replace('"[','[').replace(']"',']').replace('"{','{').replace('}"','}').replace('"',"'").replace('\\','')
 	item_dict = json.loads(data)
+	print(item_dict)
+	print(type(item_dict))
+	item_dict = item_dict[0]
+
+	final = item_dict['hand']
+	print(final)
+	print(type(final))
+	plz = final.replace('\'','"')
+	mamain = json.loads(plz)
+
+	finaldeck = item_dict['deck']
+	print(finaldeck)
+	print(type(finaldeck))
+	print (finaldeck)
+	print (type(finaldeck))
+	finallol = finaldeck.split("[")[1][:-2]
+	lastomg = "["+finallol.replace('\'','"')+"]"
+	mondeck = json.loads(lastomg)
+
+	print("avant")
+	print(mamain)
+	print(mondeck)
+
+	if (len(mamain) < 11 ):
+		mamain.append(mondeck[0])
+	mondeck.pop(0)
+
+	print("apres")
+	print(mamain)
+	print(mondeck)
+
+	print("here")
+	mamainfinale = str(mamain)
+	mondeckfinale =  finaldeck.split("[")[0]+str(mondeck)+"}"
+	#mamainfinale = mamainfinale.replace('\'','\\\'')
+	#mondeckfinale = mondeckfinale.replace('\'','\\\'')
+	print(mamainfinale)
+	print(mondeckfinale)
+
+	#lol = GamePlayer.objects.get(name=username)
+	#lol.hand = mamainfinale
+	#lol.deck = mondeckfinale
+	#lol.save()
+
+	"""
+	requetemain = "UPDATE game_gameplayer SET hand = "+"\""+mamainfinale+"\""+"WHERE name = "+"\""+username+"\""
+	print(requetemain)
+	requetedeck = "UPDATE game_gameplayer SET deck = "+"\""+mondeckfinale+"\""+"WHERE name = "+"\""+username+"\""
+	print(requetemain)
+
+	player = Game.objects.raw(requetemain)
+	player = Game.objects.raw(requetedeck)
 
 	#for item in item_dict[0]:
 		#print(item)
@@ -264,7 +323,6 @@ def playerDraw(game, username):
 
 	#data[0]['hand'].append(player.deck[0])
 
-	"""
     if player.hand.length < 10:
         player.hand.append(player.deck[0])
         return True
