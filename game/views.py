@@ -8,4 +8,5 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def game(request):
     token = request.user.auth_token
+
     return render(request, 'game.html', locals())

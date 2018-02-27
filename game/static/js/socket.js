@@ -3,6 +3,7 @@
 socket = new WebSocket("ws://" + window.location.host);
 
 socket.onopen = function() {
+	console.log("mlkjhgfdsq")
 	/* Méthode appelée juste après la connexion */
 	if (socket.readyState === WebSocket.OPEN) {
 		data = {
@@ -19,19 +20,19 @@ socket.onopen = function() {
 socket.onmessage = function(e) {
 	var result = JSON.parse(e.data);
 	/* A la réception d'un message */
-
+		console.log("azertyuiop");
         if (result["action"] != null) {
             switch (result["action"]) {
 				case "join":
-					if (result["gameIsFull"]) {
+					/*if (result["gameIsFull"]) {
                         console.log("Game is full");
                     }
-                    else {
+                    else {*/
                         if (result["username"] != document.getElementById('user').innerHTML) {
                             // Connexion d'un joueur, animation en JS ?
                             console.log("Bienvenue " + result["username"]); // debug ..
                         }
-                    }
+                    /*}*/
 					break;
 
                 case "draw":
@@ -109,9 +110,5 @@ function attack(user,attackingCard,target){
 		};
 		socket.send(JSON.stringify(data));
 	}
-
-
-
-
 }
 

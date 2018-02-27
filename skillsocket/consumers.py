@@ -1,4 +1,4 @@
-
+"""
 from channels import Group
 from game.models import Game, GamePlayer
 from django.db import models
@@ -108,10 +108,10 @@ def cardToJson(card):
 
 
 def addPlayer(game, username):
-	"""
+
     :param username: Username of the player
     :return: Game is full ?
-    """
+
 	# if self.players.count() < 2: #TODO : à décommenter pour limiter la partie à 2 joueurs
 	gamePlayer = GamePlayer(name=username)
 
@@ -147,20 +147,20 @@ def addPlayer(game, username):
 
 
 def removePlayer(game, username):
-	"""
+
     :param username:
     :return:
-    """
+
 	game.players.get(name=username).remove()
 
 
 def attack(game, username, c1, c2):
-	"""
+
     :param username: Attacker
     :param c1: Attacker card index on board
     :param c2: Attacked card index on board
     :return: Dead cards / players ?
-    """
+
 
 	data = {}
 	data['c1'] = 0
@@ -203,11 +203,11 @@ def attack(game, username, c1, c2):
 
 
 def draw(game, username, number):
-	"""
+
     :param username: Username of the drawer
     :param number: Amount of cards drawed
     :return: Hand is full ?
-    """
+
 
 	handIsFull = False
 
@@ -216,21 +216,21 @@ def draw(game, username, number):
 	print(game.players.count())
 
 	# print(Game.objects.get(id=1).players.all())
-	"""
+
 	for i in range(0, number):
 		handIsFull = playerDraw(game,username)
-	"""
+
 	game.save()
 
 	return handIsFull
 
 
 def put(game,username, card):
-	"""
+
     :param username: Username of the player putting card
     :param card: Card put
     :return: Board == full ?
-    """
+
 
 	boardIsFull = False
 
@@ -244,7 +244,7 @@ def put(game,username, card):
 	game.save()
 
 	return boardIsFull
-"""
+
 
 def playerDraw(game, username):
 	

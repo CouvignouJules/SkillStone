@@ -19,17 +19,11 @@ $( document ).ready(function() {
             myDeck.push(element);
         });
         myDeck = shuffle(myDeck)
-        console.log(myDeck)
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i])
             delete myDeck[i];
-
         }
-        myDeck = cleanArray(myDeck)
-        console.log("main");
-        console.log(myHand);
-        console.log("deck");
-        console.log(myDeck);
+        myDeck = cleanArray(myDeck);
     },$('#deckId').val());
 
     getCard(function (data) {
@@ -59,6 +53,21 @@ function getDeck(callback, id="") {
         },
     });
 }
+
+function PutCard(id) {
+    myBoard.push(myHand[id]);
+    delete myHand[id];
+    myHand = cleanArray(myHand)
+}
+
+function draw(){
+    myHand.push(myDeck[0]);
+    delete myDeck[0];
+    myDeck = cleanArray(myDeck)
+}
+
+
+
 
 function getCard(callback, id="") {
     $.ajax({
