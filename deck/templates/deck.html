@@ -51,7 +51,8 @@
     <div id="newCardCollection">
         <input type="text" id="nomdeck" placeholder="Entre le nom du Deck !" value="Nouveau Deck">
         <select class="w3-button w3-black w3-padding-large w3-large w3-margin-top" id="select-deck">
-          <option id="select-newdeck" value="">Nouveau deck</option>
+            <option id="select-newdeck" value="">Nouveau deck</option>
+            <option id="select-newdeck" value="open">ouvrir packet</option>
             {% for mydecks in deckCollection %}
                 {% for deck in decks %}
                     {% if mydecks.name == deck.name %}
@@ -63,6 +64,7 @@
         <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="senddeck" value="Créer le deck !">
         <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="modifDeck" value="Modifier le deck !" style="display: none;">
         <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="suprDeck" value="Supprimer le deck !" style="display: none;">
+        <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" type="button" id="openPack" value="ouvrir un packet" style="display: none;">
         <div class="gallery" id="newdeck">
           <!-- Selected cards will go there -->
         </div>

@@ -15,14 +15,14 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
-class Cardtype(models.Model):
+class CardType(models.Model):
     name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.name
 
 
-class CardtypeAdmin(admin.ModelAdmin):
+class CardTypeAdmin(admin.ModelAdmin):
     list_display = ['name']
     list_filter = []
     ordering = ['id']
@@ -56,7 +56,7 @@ class Card(models.Model):
     cost = models.IntegerField()
     attack = models.IntegerField()
     health = models.IntegerField()
-    cardtype = models.ForeignKey(Cardtype, on_delete=models.SET_NULL, blank=True, null=True)
+    cardType = models.ForeignKey(CardType, on_delete=models.SET_NULL, blank=True, null=True)
     effect = models.ForeignKey(Effect, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
@@ -67,13 +67,13 @@ class Card(models.Model):
 
 class CardAdmin(admin.ModelAdmin):
     list_display = ['name', 'description', 'cost', 'attack', 'health']
-    search_fields = ['effect', 'cardtype']
-    list_filter = ['cost', 'cardtype']
+    search_fields = ['effect', 'cardType']
+    list_filter = ['cost', 'cardType']
     ordering = ['id']
     fieldsets = [
         ('nom', {
             'description': 'nom',
-            'fields': ['name', 'img', 'cardtype', 'description']
+            'fields': ['name', 'img', 'cardType', 'description']
         }),
         ('stat', {
             'description': 'stat',
