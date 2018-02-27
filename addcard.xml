@@ -1,0 +1,38 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list />
+  </option>
+  <option name="httpMethod" value="PUT" />
+  <option name="urlBase" value="http://localhost:8000" />
+  <option name="urlPath" value="mydeck/cardCollection" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Authorization" />
+        <option name="value" value="Token 3db374d7d3137407b8c69ec71981fc1d484cd28b" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="X-CSRFToken" />
+        <option name="value" value="fHPMZzdN0CR5Wb964UAdFNN6M8TSUgGxt9zhmkA820jay3Z59lo3MhTCGJUgI5nt" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Content-Type" />
+        <option name="value" value="application/json" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="" />
+        <option name="value" value="" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="true" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="{&quot;deck&quot;:[20,19]}" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

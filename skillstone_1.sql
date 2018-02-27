@@ -9,10 +9,7 @@ id`,
 (1, 'pbkdf2_sha256$100000$2j8WyRty5ThZ$DaUrAqxzOvAQCR1rLcfnqOPyBuxd9Xu5aWydcRLdAv8=', '2018-01-26 07:07:36.804742', 1, 'root', '', '', '', 1, 1, '2018-01-19 10:53:55.483275'),
 (2, 'pbkdf2_sha256$100000$F5wkL2RRg7kA$0vhahw0+XMbFLM/kIzq+5DJsnaqwa5ibT8hIj+aBVAs=', '2018-01-19 10:58:38.596287', 0, 'toto', '', '', '', 0, 1, '2018-01-19 10:56:03.696634');
 
-INSERT INTO `deck_card` (`
-id`,
-`name
-`, `description`, `cost`, `attack`, `health`, `cardType_id`, `effect_id`, `img`) VALUES
+INSERT INTO `deck_card` (`id`,`name`, `description`, `cost`, `attack`, `health`, `cardType_id`, `effect_id`, `img`) VALUES
 (1, 'Boule de feu', 'Inflige 6 points de dégâts.', 4, 6, 0, 2, NULL, 'static/img/card/Boule_de_feu.jpg'),
 (2, 'Cobra empereur', 'Toxicité', 3, 2, 3, 1, 3, 'static/img/card/Cobra_empereur.jpg'),
 (3, 'Feu follet', 'Ne fait rien', 0, 1, 1, 1, NULL, 'static/img/card/Feu_follet.jpg'),
@@ -84,7 +81,7 @@ id`,
 (2, 'Provocation'),
 (3, 'Toxicité'),
 (4, 'Cri de guerre'),
-(5, "Râle d'agonie"),
+(5, "râle d'agonie"),
 (6, "Charge")
 
 INSERT INTO `deck_player` (`
