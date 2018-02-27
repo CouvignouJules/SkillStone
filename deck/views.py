@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 
-import json
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Deck, Card
@@ -12,6 +12,8 @@ from .serializer import DeckSerializer, CardSerializer
 @login_required
 def myCollection(request):
     token = request.user.auth_token
+
+    carddeck = getDeckCardd(17)
 
     cards = getCardCollection()
     cardCollection = getCardCollection(request.user.id)
@@ -48,14 +50,10 @@ def deck(request, id=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET'])
 def cardCollection(request, user=None):
-    if request.method == 'get':
-        return Response(getCardCollection(user))
-    elif request.method == 'PUT':
-        data = request.data.get('deck')
-        for card in data:
-            request.user.player.cardcollection.add(card)
+    return Response(getCardCollection(user))
+
 
 def getCardCollection(user=None):
     if user:
@@ -65,19 +63,10 @@ def getCardCollection(user=None):
     serializer = CardSerializer(collection, many=True)
     return serializer.data
 
-@api_view(['GET'])
-def getCard(request, id=None):
-    if id:
-        card = Card.objects.filter(id=id)
-    else:
-        card = Card.objects.all()
-    serializer = CardSerializer(card, many=True)
-    return Response(serializer.data)
 
 @api_view(['GET'])
 def deckCollection(request, user=None):
     return Response(getDeckCollection(user))
-
 
 
 def getDeckCollection(user=None):
@@ -91,10 +80,10 @@ def getDeckCollection(user=None):
 
 @api_view(['GET'])
 def deckCards(request, id=None):
-    return Response(getDeckCard(id))
+    return Response(getDeckCardd(id))
 
 
-def getDeckCard(id=None):
+def getDeckCardd(id=None):
     if id:
         collection = Card.objects.raw('SELECT * FROM `deck_card` LEFT JOIN deck_deck_cards ON deck_card.id = deck_deck_cards.card_id WHERE (deck_deck_cards.deck_id = %s)',[id])
     else:
