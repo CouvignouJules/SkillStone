@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/game/static/js/game.js" afterPath="$PROJECT_DIR$/game/static/js/game.js" />
       <change beforePath="$PROJECT_DIR$/game/static/js/socket.js" afterPath="$PROJECT_DIR$/game/static/js/socket.js" />
-      <change beforePath="$PROJECT_DIR$/game/templates/game.html" afterPath="$PROJECT_DIR$/game/templates/game.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,38 +19,33 @@
         <entry file="file://$PROJECT_DIR$/game/templates/game.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="29" />
+              <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game/static/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
-              <caret line="25" column="206" lean-forward="false" selection-start-line="25" selection-start-column="206" selection-end-line="25" selection-end-column="206" />
+              <caret line="25" column="196" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="196" />
               <folding>
-                <element signature="n#!!block;n#getDeck#0" expanded="false" />
-                <element signature="n#!!block;n#getCard#0" expanded="false" />
-                <element signature="n#!!block;n#getCookie#0" expanded="false" />
-                <element signature="n#!!block;n#shuffle#0" expanded="false" />
-                <element signature="n#!!block;n#cleanArray#0" expanded="false" />
-                <marker date="1519828301624" expanded="true" signature="682:710" ph="..." />
-                <marker date="1519828301624" expanded="true" signature="889:917" ph="..." />
-                <marker date="1519828301624" expanded="true" signature="1516:1544" ph="..." />
+                <marker date="1519830350291" expanded="true" signature="683:711" ph="..." />
+                <marker date="1519830350291" expanded="true" signature="880:908" ph="..." />
+                <marker date="1519830350291" expanded="true" signature="1497:1525" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="socket.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="socket.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game/static/js/socket.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="41" column="218" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="218" />
+            <state relative-caret-position="460">
+              <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
               <folding>
-                <marker date="1519828283017" expanded="true" signature="1563:1591" ph="..." />
+                <marker date="1519830497371" expanded="true" signature="1719:1747" ph="..." />
               </folding>
             </state>
           </provider>
@@ -73,8 +67,8 @@
         <option value="$PROJECT_DIR$/SkillStone/urls.py" />
         <option value="$PROJECT_DIR$/skillsocket/routing.py" />
         <option value="$PROJECT_DIR$/game/templates/game.html" />
-        <option value="$PROJECT_DIR$/game/static/js/socket.js" />
         <option value="$PROJECT_DIR$/game/static/js/game.js" />
+        <option value="$PROJECT_DIR$/game/static/js/socket.js" />
       </list>
     </option>
   </component>
@@ -116,45 +110,6 @@
               <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
               <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
               <item name="deck" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="card" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SkillStone" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SkillStone" type="b2602c69:ProjectViewProjectNode" />
@@ -555,7 +510,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
+            <element signature="e#0#57#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,34 +612,29 @@
     <entry file="file://$PROJECT_DIR$/game/templates/game.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="29" />
+          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game/static/js/socket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="41" column="218" lean-forward="true" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="218" />
-          <folding>
-            <marker date="1519828283017" expanded="true" signature="1563:1591" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game/static/js/game.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
-          <caret line="25" column="206" lean-forward="false" selection-start-line="25" selection-start-column="206" selection-end-line="25" selection-end-column="206" />
+          <caret line="25" column="196" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="196" />
           <folding>
-            <element signature="n#!!block;n#getDeck#0" expanded="false" />
-            <element signature="n#!!block;n#getCard#0" expanded="false" />
-            <element signature="n#!!block;n#getCookie#0" expanded="false" />
-            <element signature="n#!!block;n#shuffle#0" expanded="false" />
-            <element signature="n#!!block;n#cleanArray#0" expanded="false" />
-            <marker date="1519828301624" expanded="true" signature="682:710" ph="..." />
-            <marker date="1519828301624" expanded="true" signature="889:917" ph="..." />
-            <marker date="1519828301624" expanded="true" signature="1516:1544" ph="..." />
+            <marker date="1519830350291" expanded="true" signature="683:711" ph="..." />
+            <marker date="1519830350291" expanded="true" signature="880:908" ph="..." />
+            <marker date="1519830350291" expanded="true" signature="1497:1525" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game/static/js/socket.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="46" column="20" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="20" />
+          <folding>
+            <marker date="1519830497371" expanded="true" signature="1719:1747" ph="..." />
           </folding>
         </state>
       </provider>

@@ -39,7 +39,10 @@ socket.onmessage = function(e) {
                     if (result["username"] != document.getElementById('user').innerHTML) {
                         console.log(result["username"] + " pioche une carte");
                         oponentHand += 1;
-                        $('#opponentHand').append("<div class='opponentHandCard' id='oppnentHandCard-" + oponentHand + "'><img title='deck' src='game\static\img\deck.png' style='width: 200px; height: 290px;' /></div>")
+                    	console.log("pk sa affiche pas")
+                    }
+                    if (result["username"] != document.getElementById('user').innerHTML) {
+                        $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
                     }
                     break;
 
