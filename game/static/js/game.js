@@ -79,7 +79,7 @@ function attaquer( attaquant, attaquer) {
 function getDeck(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://10.13.7.217:8000/mydeck/deckCards/"+id,
+        url: "http://" + window.location.host + ":8000/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -99,7 +99,7 @@ function getDeck(callback, id="") {
 function getCard(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://10.13.7.217:8000/mydeck/card/"+id,
+        url: "http://" + window.location.host + ":8000/mydeck/card/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
