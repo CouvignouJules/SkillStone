@@ -1,3 +1,5 @@
 # SkillStone
 
-Django Version 2.0 required (not higher or below)
+Hearthstone-like card game coded in Django web Framework
+
+![Imgur Image](https://i.imgur.com/ymhyamX.jpg)
