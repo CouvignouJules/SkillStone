@@ -1,6 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
+import logging
+
+
+logger = logging.getLogger('SkillStoneInfos')
 
 import json
 from django.contrib.auth.decorators import login_required
@@ -11,6 +15,7 @@ from .serializer import DeckSerializer, CardSerializer
 
 @login_required
 def myCollection(request):
+    logger.info("Deck management")
     token = request.user.auth_token
 
     cards = getCardCollection()
@@ -33,6 +38,7 @@ def newDeck(request):
         serializer.save()
         request.user.player.deckcollection.add(serializer.data["id"])
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.info("New deck created")
     return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
     
 

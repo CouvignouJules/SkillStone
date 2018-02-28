@@ -3,6 +3,7 @@ var token;
 var csrftoken;
 
 $( document ).ready(function() {
+    console.log(window.location.host);
     $('#nomdeck').val("Nouveau Deck");
     token = document.getElementById("token").innerHTML;
     console.log(token);
@@ -116,7 +117,7 @@ function getCookie(name) {
 function getDeck(id,callback) {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + ":8000/mydeck/deckCards/"+id,
+        url: "http://" + window.location.host + "/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -136,7 +137,7 @@ function getDeck(id,callback) {
 function  suprDeck(id) {
     $.ajax({
         type: "DELETE",
-        url: "http://" + window.location.host + ":8000/mydeck/deck/"+id,
+        url: "http://" + window.location.host + "/mydeck/deck/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -156,7 +157,7 @@ function  suprDeck(id) {
 function getCard(id,callback) {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + ":8000/mydeck/card/"+id,
+        url: "http://" + window.location.host + "/mydeck/card/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -176,7 +177,7 @@ function getCard(id,callback) {
 function addCard(data) {
     $.ajax({
         type: "PUT",
-        url: "http://" + window.location.host + ":8000/mydeck/cardCollection",
+        url: "http://" + window.location.host + "/mydeck/cardCollection",
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -196,7 +197,7 @@ function addCard(data) {
 function sendDeck(data) {
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + ":8000/mydeck/deck",
+        url: "http://" + window.location.host + "/mydeck/deck",
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,

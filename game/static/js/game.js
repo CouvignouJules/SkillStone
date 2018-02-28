@@ -9,12 +9,16 @@ var cards = [];
 var pv;
 var token;
 var csrftoken;
+var turn;
+var mana;
 
 $( document ).ready(function() {
     pv = 30;
     oponentHand = 5;
     token = document.getElementById("token").innerHTML;
     csrftoken = getCookie('csrftoken');
+    mana = 1;
+
 
     getDeck(function (data) {
         data.forEach(function(element) {
@@ -55,6 +59,7 @@ function putCard(handId, cardId) {
     myBoard.push(myHand[handId]);
     $('#myBoard').append("<span class='myBoardCard onBoardCard' id='myBoardCard-"+myBoard.length+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
     $("#myHandCard-"+handId+"").remove();
+    print(myHand[handId]);
     delete myHand[handId];
     if (socket.readyState === WebSocket.OPEN) {
 		data = {
