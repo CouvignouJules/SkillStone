@@ -1,12 +1,24 @@
 START
 TRANSACTION;
 
+INSERT INTO `deck_cardtype` (`
+id`,`name
+`) VALUES
+(1, 'Minion'),
+(2, 'Spell');
 
-INSERT INTO `auth_user` (`
-id`,`password
-`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$100000$2j8WyRty5ThZ$DaUrAqxzOvAQCR1rLcfnqOPyBuxd9Xu5aWydcRLdAv8=', '2018-01-26 07:07:36.804742', 1, 'root', '', '', '', 1, 1, '2018-01-19 10:53:55.483275'),
-(2, 'pbkdf2_sha256$100000$F5wkL2RRg7kA$0vhahw0+XMbFLM/kIzq+5DJsnaqwa5ibT8hIj+aBVAs=', '2018-01-19 10:58:38.596287', 0, 'toto', '', '', '', 0, 1, '2018-01-19 10:56:03.696634');
+INSERT INTO `deck_effect` (`
+id`,`name
+`) VALUES
+(1, 'Camouflage'),
+(2, 'Provocation'),
+(3, 'Toxicité'),
+(4, 'Cri de guerre'),
+(5, "Râle d'agonie"),
+(6, "Charge"),
+(7, "Passif"),
+(8, "Bouclier divin")
+
 
 INSERT INTO `deck_card` (`
 id`,`name
@@ -110,91 +122,6 @@ id`,`name
 (97, 'Sprint', 'Vous piochez 4 cartes.', 7, 0, 0, 2, NULL, 'static/img/card/Sprint.png'),
 (98, 'Tir meurtrier', 'Détruit un serviteur aléatoire.', 3, 0, 0, 2, NULL, 'static/img/card/Tir_meurtrier.png'),
 (99, 'Toucher guérisseur', 'Rend 8 points de vie.', 3, 0, 0, 2, NULL, 'static/img/card/Toucher_guerisseur.png'),
-(100, 'Voile de mort', 'Inflige 1 point de dégâts à un serviteur. Vous piochez une carte si ce serviteur est tué.', 1, 1, 0, 2, NULL, 'static/img/card/Voile_de_mort.png'),
-
-INSERT INTO `deck_cardtype` (`
-id`,`name
-`) VALUES
-(1, 'Minion'),
-(2, 'Spell');
-
-INSERT INTO `deck_deck` (`
-id`,`name
-`) VALUES
-(1, 'fist'),
-(2, 'second');
-
-INSERT INTO `deck_deck_cards` (`
-id`,
-`deck_id
-`, `card_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 2, 1),
-(7, 2, 2),
-(8, 2, 4),
-
-(9, 1, 10),
-(10, 1, 11),
-(11, 1, 12),
-(12, 1, 13),
-(13, 1, 14),
-(14, 1, 15),
-(15, 1, 16),
-(16, 1, 17),
-(17, 1, 18),
-(18, 1, 19),
-(19, 1, 20),
-(20, 1, 7),
-(21, 1, 8),
-(22, 1, 9);
-
-INSERT INTO `deck_effect` (`
-id`,`name
-`) VALUES
-(1, 'Camouflage'),
-(2, 'Provocation'),
-(3, 'Toxicité'),
-(4, 'Cri de guerre'),
-(5, "Râle d'agonie"),
-(6, "Charge"),
-(7, "Passif"),
-(8, "Bouclier divin")
-
-INSERT INTO `deck_player` (`
-id`,
-`user_id
-`) VALUES
-(1, 1),
-(2, 2);
-
-INSERT INTO `deck_player_cardcollection` (`
-id`,
-`player_id
-`, `card_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-
-(6, 1, 6),
-(7, 1, 7),
-(8, 1, 8),
-(9, 1, 9),
-(10, 1, 10),
-(11, 1, 11),
-(12, 1, 12),
-(13, 1, 13),
-(14, 1, 14),
-(15, 1, 15),
-(16, 1, 16),
-(17, 1, 17),
-(18, 1, 18),
-(19, 1, 19),
-(20, 1, 20);
+(100, 'Voile de mort', 'Inflige 1 point de dégâts à un serviteur. Vous piochez une carte si ce serviteur est tué.', 1, 1, 0, 2, NULL, 'static/img/card/Voile_de_mort.png');
 
 COMMIT;

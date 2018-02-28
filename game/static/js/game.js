@@ -138,7 +138,7 @@ function attack( assailant, target) {
 function getDeck(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + "/mydeck/deckCards/"+id,
+        url: "http://skillstone.thulium.ovh:8000/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -158,7 +158,7 @@ function getDeck(callback, id="") {
 function getCard(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + "/mydeck/card/"+id,
+        url: "http://skillstone.thulium.ovh:8000/mydeck/card/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,

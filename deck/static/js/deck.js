@@ -119,7 +119,7 @@ function getCookie(name) {
 function getDeck(id,callback) {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + "/mydeck/deckCards/"+id,
+        url: "http://skillstone.thulium.ovh:8000/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -139,7 +139,7 @@ function getDeck(id,callback) {
 function  suprDeck(id) {
     $.ajax({
         type: "DELETE",
-        url: "http://" + window.location.host + "/mydeck/deck/"+id,
+        url: "http://skillstone.thulium.ovh:8000/mydeck/deck/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -159,7 +159,7 @@ function  suprDeck(id) {
 function getCard(id,callback) {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + "/mydeck/card/"+id,
+        url: "http://skillstone.thulium.ovh:8000/mydeck/card/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -179,7 +179,7 @@ function getCard(id,callback) {
 function addCard(data) {
     $.ajax({
         type: "PUT",
-        url: "http://" + window.location.host + "/mydeck/cardCollection",
+        url: "http://skillstone.thulium.ovh:8000/mydeck/cardCollection",
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -199,7 +199,7 @@ function addCard(data) {
 function sendDeck(data) {
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + "/mydeck/deck",
+        url: "http://skillstone.thulium.ovh:8000/mydeck/deck",
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
