@@ -11,6 +11,7 @@ var csrftoken;
 
 $( document ).ready(function() {
     pv = 30;
+    oponentHand = 5;
     token = document.getElementById("token").innerHTML;
     csrftoken = getCookie('csrftoken');
 
@@ -20,8 +21,9 @@ $( document ).ready(function() {
         });
         myDeck = shuffle(myDeck)
         for (i= 0; i<5; i++){
-            myHand.push(myDeck[i])
-            /* ajouter la div de la carte dans la main */
+            myHand.push(myDeck[i]);
+            $('#myHand').append("<div class='myHandCard' id='myHandCard-"+i+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 200px; height: 290px;' /></div>")
+            $('#opponentHand').append("<div class='opponentHandCard' id='oppnentHandCard-" + oponentHand + "'><img title='deck' src='game\static\img\deck.png' style='width: 200px; height: 290px;' /></div>")
             delete myDeck[i];
         }
         myDeck = cleanArray(myDeck);
@@ -34,27 +36,6 @@ $( document ).ready(function() {
     });
 });
 
-
-function getDeck(callback, id="") {
-    $.ajax({
-        type: "GET",
-        url: "http://192.168.1.31:8000/mydeck/deckCards/"+id,
-        dataType: "json",
-        headers: {
-            "Authorization": 'Token '+token,
-            "X-CSRFToken": csrftoken,
-            "Content-Type":'application/json'
-        },
-        success: function (data) {
-            console.log('Success!',data)
-            callback(data)
-        },
-        error : function(err) {
-            console.log('Error!', err)
-        },
-    });
-}
-
 function PutCard(id) {
     myBoard.push(myHand[id]);
     /* ajouter la div de la carte sur le board */
@@ -64,20 +45,27 @@ function PutCard(id) {
 
 function draw(){
     myHand.push(myDeck[0]);
-    /* ajouter la div de la carte dans la main */
+    $('#myHand').append("<div class='myHandCard' id='myHandCard-"+myDeck.length+"'><img title='"+myDeck[0].name+"' src='"+myDeck[0].img+"' style='width: 200px; height: 290px;' /></div>")
     delete myDeck[0];
     myDeck = cleanArray(myDeck)
+    if (socket.readyState === WebSocket.OPEN) {
+		data = {
+			"action": "draw",
+			"username": document.getElementById('user').innerHTML,
+            "hand": myHand.length,
+		};
+		socket.send(JSON.stringify(data));
+	}
 }
 
 function attaquer( attaquant, attaquer) {
     oponentBoard[attaquer].health = oponentBoard[attaquer].health - myBoard[attaquant].attack
 }
 
-
-function getCard(callback, id="") {
+function getDeck(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://192.168.1.31:8000/mydeck/card/"+id,
+        url: "http://10.13.7.217:8000/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -85,7 +73,27 @@ function getCard(callback, id="") {
             "Content-Type":'application/json'
         },
         success: function (data) {
-            console.log('Success!',data)
+            console.log('Success!')
+            callback(data)
+        },
+        error : function(err) {
+            console.log('Error!', err)
+        },
+    });
+}
+
+function getCard(callback, id="") {
+    $.ajax({
+        type: "GET",
+        url: "http://10.13.7.217:8000/mydeck/card/"+id,
+        dataType: "json",
+        headers: {
+            "Authorization": 'Token '+token,
+            "X-CSRFToken": csrftoken,
+            "Content-Type":'application/json'
+        },
+        success: function (data) {
+            console.log('Success!')
             callback(data)
         },
         error : function(err) {
@@ -111,30 +119,30 @@ function getCookie(name) {
 }
 
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
 
-  return array;
+    return array;
 }
 
 function cleanArray(actual) {
-  var newArray = new Array();
-  for (var i = 0; i < actual.length; i++) {
-    if (actual[i]) {
-      newArray.push(actual[i]);
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+        if (actual[i]) {
+            newArray.push(actual[i]);
+        }
     }
-  }
-  return newArray;
+    return newArray;
 }
