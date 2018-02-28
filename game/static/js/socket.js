@@ -29,17 +29,18 @@ socket.onmessage = function(e) {
                     if (result["username"] != document.getElementById('user').innerHTML) {
                         // Connexion d'un joueur, animation en JS ?
                         console.log("Bienvenue " + result["username"]); // debug ..
+                        turn = true;
+                        $( ":button" ).prop("disabled",false);
                     }
+
                     /*}*/
                     break;
 
                 case "draw":
-                    console.log("prout");
                     // L'autre joueur a draw, petite animation en JS ?
                     if (result["username"] != document.getElementById('user').innerHTML) {
                         console.log(result["username"] + " pioche une carte");
                         oponentHand += 1;
-                    	console.log("pk sa affiche pas")
                     }
                     if (result["username"] != document.getElementById('user').innerHTML) {
                         $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + oponentHand + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
@@ -59,7 +60,6 @@ socket.onmessage = function(e) {
 						oponentHand -=1;
 						console.log(result["username"] + " pose la carte ");
 					}
-					console.lo
                     break;
 
                 case "attack":
@@ -67,9 +67,16 @@ socket.onmessage = function(e) {
                     // MAJ pdv joueur/carte, carte dead ou pas, fin partie ou pas
                     console.log(result["username"] + " attaque avec ");
                     break;
-
+                case "pass":
+                    if (result["username"] != document.getElementById('user').innerHTML) {
+                        console.log(result["username"] + " passe son tour");
+                        turn = true;
+                        draw();
+                        $( ":button" ).prop("disabled",false);
+                    }
+                    // L'autre joueur passe son tour
+                    break;
                 default:
-
                     break;
             }
 		}

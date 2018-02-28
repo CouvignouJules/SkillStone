@@ -9,15 +9,14 @@ var pv;
 var token;
 var csrftoken;
 var turn;
-var mana;
 
 $( document ).ready(function() {
     pv = 30;
     oponentHand = 5;
     token = document.getElementById("token").innerHTML;
     csrftoken = getCookie('csrftoken');
-    mana = 1;
-
+    turn = false;
+    $( ":button" ).prop("disabled",true);
 
     getDeck(function (data) {
         data.forEach(function(element) {
@@ -39,6 +38,7 @@ $( document ).ready(function() {
         });
     });
 
+
     $(document).on('click', '.myHandCard', function () {
         console.log($(this).children('input[name="cardId"]').val())
         console.log(this.id.split('-')[1]);
@@ -59,6 +59,18 @@ $( document ).ready(function() {
 
     $('#attack-button').on('click', function () {
         attack(duel[0],duel[1]);
+    })
+
+    $('#pass-button').on('click', function () {
+        $( ":button" ).prop("disabled",true);
+        turn = false;
+        if (socket.readyState === WebSocket.OPEN) {
+            data = {
+                "action": "pass",
+                "username": document.getElementById('user').innerHTML
+            };
+            socket.send(JSON.stringify(data));
+        }
     })
 });
 

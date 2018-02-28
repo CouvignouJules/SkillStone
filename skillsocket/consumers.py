@@ -45,6 +45,8 @@ def ws_message(message):
 			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
 		elif obj['action'] == 'attack':
 			Group("player").send({'text': json.dumps(obj)}) # Va nous servir à update l'UI
+		elif obj['action'] == 'pass':
+			Group("player").send({'text': json.dumps(obj)})  # Va nous servir à update l'UI
 
 		#elif obj['action'] == 'disconnect':
 
