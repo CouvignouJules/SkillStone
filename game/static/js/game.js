@@ -1,6 +1,7 @@
 var myDeck = [];
 var myHand = [];
 var myBoard = [];
+var duel = [];
 var oponentDeck;
 var oponentHand;
 var oponentBoard = [];
@@ -40,11 +41,19 @@ $( document ).ready(function() {
         console.log(this.id.split('-')[1]);
         putCard(this.id.split('-')[1],$(this).children('input[name="cardId"]').val())
     });
+
+    $(document).on('click', '.onBoardCard', function () {
+        if ($(this).parent().id == "oponentBoard"){
+            //duel.push(oponentBoard[].id)
+        }else{
+
+        }
+    });
 });
 
 function putCard(handId, cardId) {
     myBoard.push(myHand[handId]);
-    $('#myBoard').append("<span class='myBoardCard' id='myBoardCard-"+myBoard.length+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
+    $('#myBoard').append("<span class='myBoardCard onBoardCard' id='myBoardCard-"+myBoard.length+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
     $("#myHandCard-"+handId+"").remove();
     delete myHand[handId];
     if (socket.readyState === WebSocket.OPEN) {
@@ -72,8 +81,18 @@ function draw(){
 	}
 }
 
-function attaquer( attaquant, attaquer) {
-    oponentBoard[attaquer].health = oponentBoard[attaquer].health - myBoard[attaquant].attack
+function attaquer( assailant, target) {
+    oponentBoard[target].health = oponentBoard[target].health - myBoard[assailant].attack;
+    myBoard[assailant].health = myBoard[assailant].health - oponentBoard[target].attack;
+    	if (socket.readyState === WebSocket.OPEN) {
+		data = {
+			"action": "attack",
+			"username": document.getElementById('user').innerHTML,
+			"attackingCard": assailant,
+			"target": target
+		};
+		socket.send(JSON.stringify(data));
+	}
 }
 
 function getDeck(callback, id="") {

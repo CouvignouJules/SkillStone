@@ -52,7 +52,7 @@ socket.onmessage = function(e) {
 						cards.forEach(function(element) {
 							if(element.id == result["cardId"]){
 								oponentBoard.push(element);
-								$('#oponentBoard').append("<span class='oponentBoardCard' id='oponentBoardCard-"+oponentHand+"'><img title='"+element.name+"' src='"+element.img+"' style='width: 100px; height: 190px;' /></span>");
+								$('#oponentBoard').append("<span class='oponentBoardCard onBoardCard' id='oponentBoardCard-"+(oponentBoard.length-1)+"'><img title='"+element.name+"' src='"+element.img+"' style='width: 100px; height: 190px;' /></span>");)
 							}
 						})
 						$("#oppnentHandCard-"+(oponentHand)+"").remove()
@@ -88,14 +88,6 @@ socket.onclose = function(e) {
 function attack(user,attackingCard,target){
 	console.log("attack");
 
-	if (socket.readyState === WebSocket.OPEN) {
-		data = {
-			"action": "attack",
-			"username": document.getElementById('user').innerHTML,
-			"attackingCard": attackingCard,
-			"target": target
-		};
-		socket.send(JSON.stringify(data));
-	}
+
 }
 
