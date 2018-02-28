@@ -23,7 +23,7 @@ $( document ).ready(function() {
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i]);
             $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
-            $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
+            $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + (i+1) + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
             delete myDeck[i];
         }
         myDeck = cleanArray(myDeck);
@@ -59,7 +59,7 @@ function putCard(handId, cardId) {
 
 function draw(){
     myHand.push(myDeck[0]);
-    $('#myHand').append("<span class='myHandCard' id='myHandCard-"+(myHand.length-1)+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
+    $('#myHand').append("<span class='myHandCard' id='myHandCard-"+(myHand.length-1)+"'><input name='cardId' style='display: none' value='"+myDeck[0].id+"'><img title='"+myDeck[0].name+"' src='"+myDeck[0].img+"' style='width: 100px; height: 190px;' /></span>")
     delete myDeck[0];
     myDeck = cleanArray(myDeck)
     if (socket.readyState === WebSocket.OPEN) {

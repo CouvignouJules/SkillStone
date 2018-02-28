@@ -52,13 +52,14 @@ socket.onmessage = function(e) {
 						cards.forEach(function(element) {
 							if(element.id == result["cardId"]){
 								oponentBoard.push(element);
-								$('#oponentBoard').append("<span class='oponentBoardCard' id='oponentBoardCard-"+oponentBoard.length+"'><img title='"+element.name+"' src='"+element.img+"' style='width: 100px; height: 190px;' /></span>");
+								$('#oponentBoard').append("<span class='oponentBoardCard' id='oponentBoardCard-"+oponentHand+"'><img title='"+element.name+"' src='"+element.img+"' style='width: 100px; height: 190px;' /></span>");
 							}
 						})
-						$("#oponentHandCard-0").remove()
+						$("#oppnentHandCard-"+(oponentHand)+"").remove()
 						oponentHand -=1;
 						console.log(result["username"] + " pose la carte ");
 					}
+					console.lo
                     break;
 
                 case "attack":
