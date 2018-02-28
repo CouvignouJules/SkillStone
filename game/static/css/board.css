@@ -48,3 +48,7 @@ body {
 	top: 0px;
 	bottom: 0px;
 }
+#draw-button {
+	position: absolute;
+	z-index: 1000;
+}
