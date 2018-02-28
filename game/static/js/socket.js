@@ -78,7 +78,8 @@ socket.onmessage = function(e) {
                             }
                         }else {
                             console.log()
-                            mypv -= oponentBoard[result["attackingCard"]].attack    ;
+                            mypv -= oponentBoard[result["attackingCard"]].attack;
+										        $("#hero2-hp").text(mypv);
                         }
                         duel = [];
                     }
@@ -106,4 +107,3 @@ socket.onclose = function(e) {
 	};
 	socket.send(JSON.stringify(data));
 };
-

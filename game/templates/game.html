@@ -4,6 +4,7 @@
 <script src={% static "bataille/js/bataille.js" %}></script>
 <script src={% static "js/socket.js" %}></script>
 <script src={% static "js/game.js" %}></script>
+<link rel="stylesheet" type="text/css" href={% static "css/w3.css" %}>
 
 <head>
     <title>Skillstone - En partie</title>
@@ -17,8 +18,14 @@
     <div id="user" style="display:none ">{{ user.username }}</div> <!-- balise cachée qui nous sert à passer l'user actuel au JS -->
 
     <div id="board">
-        <div class="onBoardCard" id="oponenthero" style="background-color: #8b1014; height: 200px; width: 200px"></div>
-        <div class="hero" id="myhero" style="background-color: #0D47A1; height: 200px; width: 200px"></div>
+        <div class="onBoardCard" id="oponenthero" style="height: 200px; width: 200px">
+          <img title="HERO 1" src="{% static "img/card/hero1.png" %}" style="height: 200px; width: 200px" />
+          <div class="bottom-left" id="hero1-hp">30</div>
+        </div>
+        <div class="hero" id="myhero" style="height: 200px; width: 200px">
+          <img title="HERO 2" src="{% static "img/card/hero2.png" %}" style="height: 200px; width: 200px" />
+          <div class="bottom-left" id="hero2-hp">30</div>
+        </div>
         <div id="oponentHand">
                <!-- ajout de TR/TD dynamiquement en fonction de la hand -->
         </div>
@@ -32,12 +39,14 @@
         <div id="myHand">
                <!-- ajout de TR/TD dynamiquement en fonction de la hand -->
         </div>
-        <input id="pass-button" type="button" value="Passer">
-        <input id="attack-button" type="button" value="Attaquer">
-        <input id="draw-button" type="button" onclick="draw(1)"> <!-- TODO : 1 a changer par le nombre de cartes piochée(s) -->
+        <div id="game-btn">
+        <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" id="attack-button" type="button" value="Attaquer">
+          <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" id="pass-button" type="button" value="Passer">
+          <input class="w3-button w3-black w3-padding-large w3-large w3-margin-top" id="draw-button" type="button" value="Piocher" onclick="draw(1)" style="display: none;">
+        </div>
     </div>
 
-
+    <!-- 2 JEUX POUR LE PRIX D'UN : C'EST POUR LE LOL -->
     <!-- Bataille -->
     <div id="bataille" onclick="next_click()">
     	<img id="bataille-logo" src={% static "bataille/img/logo.png" %} draggable="false" style="-moz-user-select: none;" />
@@ -54,7 +63,7 @@
 
 <!----------------------------------- parametre pour le JS ---------------------------------------------------->
     <span id="token" style="display: none">{{ token }}</span>
-    <input id="deckId" type="input" value="1">
+    <input id="deckId" type="input" value="1" style="display: none" />
 
 
 

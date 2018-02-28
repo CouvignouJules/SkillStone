@@ -28,8 +28,9 @@ $( document ).ready(function() {
             $("#modifDeck").hide();
             $("#suprDeck").hide();
             $("#senddeck").show();
+            $("#openPack").hide();
             $('#nomdeck').val("Nouveau Deck");
-            $('#newdeck').empty()
+            $('#newdeck').empty();
         } else if($("#select-deck").val() == "open"){
             deck = [];
             $('#newdeck').empty()
@@ -44,6 +45,7 @@ $( document ).ready(function() {
             $("#modifDeck").show();
             $("#suprDeck").show();
             $("#senddeck").hide();
+            $("#openPack").hide();
             getDeck($("#select-deck").val(),function (data) {
                 $('#newdeck').empty()
                 $('#nomdeck').val($("#select-deck option:selected").text());
@@ -68,7 +70,7 @@ $( document ).ready(function() {
     $("#suprDeck").on('click', function () {
         suprDeck($('#select-deck').val());
     });
-    
+
     $("#modifDeck").on('click', function () {
         var nom = $('#nomdeck').val();
         deck = cleanArray(deck);

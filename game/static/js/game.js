@@ -27,8 +27,8 @@ $( document ).ready(function() {
         myDeck = shuffle(myDeck)
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i]);
-            $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
-            $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
+            $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='http://" + window.location.host + "/" + myDeck[i].img + "' style='width: 130px; height: 190px;' /></span>")
+            $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='http://" + window.location.host + "/static/img/deck.png' style='width: 130px; height: 190px;' /></span>")
             delete myDeck[i];
         }
         myDeck = cleanArray(myDeck);
@@ -49,6 +49,7 @@ $( document ).ready(function() {
 
     $(document).on('click', '.onBoardCard', function () {
         if (duel.length < 2){
+            $(this).find('img').css('box-shadow', '10px 10px 5px #888');
             if ($(this).parent().attr('id') == "oponentBoard"){
                 console.log("pasmacarte");
                 duel.push(this.id.split('-')[1]);
@@ -56,7 +57,6 @@ $( document ).ready(function() {
                 console.log("macarte");
                 duel.push(this.id.split('-')[1]);
             }else {
-                console.log("toto");
                 duel.push(this.id);
             }
         }
@@ -81,9 +81,8 @@ $( document ).ready(function() {
 
 function putCard(handId, cardId) {
     myBoard.push(myHand[handId]);
-    $('#myBoard').append("<span class='myBoardCard onBoardCard' id='myBoardCard-"+(myBoard.length-1)+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
+    $('#myBoard').append("<span class='myBoardCard onBoardCard' id='myBoardCard-"+(myBoard.length-1)+"'><img title='"+myHand[handId].name+"' src='http://" + window.location.host + "/" + myHand[handId].img + "' style='width: 130px; height: 190px;' /></span>")
     $("#myHandCard-"+handId+"").remove();
-    print(myHand[handId]);
     delete myHand[handId];
     if (socket.readyState === WebSocket.OPEN) {
 		data = {
@@ -97,7 +96,7 @@ function putCard(handId, cardId) {
 
 function draw(){
     myHand.push(myDeck[0]);
-    $('#myHand').append("<span class='myHandCard' id='myHandCard-"+(myHand.length-1)+"'><input name='cardId' style='display: none' value='"+myDeck[0].id+"'><img title='"+myDeck[0].name+"' src='"+myDeck[0].img+"' style='width: 100px; height: 190px;' /></span>")
+    $('#myHand').append("<span class='myHandCard' id='myHandCard-"+(myHand.length-1)+"'><input name='cardId' style='display: none' value='"+myDeck[0].id+"'><img title='"+myDeck[0].name+"' src='http://" + window.location.host + "/" + myDeck[0].img+"' style='width: 130px; height: 190px;' /></span>")
     delete myDeck[0];
     myDeck = cleanArray(myDeck)
     if (socket.readyState === WebSocket.OPEN) {
@@ -122,6 +121,7 @@ function attack( assailant, target) {
         }
     }else{
         oponentPv -= myBoard[assailant].attack;
+        $("#hero1-hp").text(oponentPv);
     }
     if (socket.readyState === WebSocket.OPEN) {
 		data = {

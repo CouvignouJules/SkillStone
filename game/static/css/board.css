@@ -1,8 +1,8 @@
 body {
 	margin:0;
   	padding:0;
-  	background: url(/static/img/board.png) no-repeat center fixed;
   	-webkit-background-size: cover;
+  	background: url(/static/img/board.png) no-repeat center fixed;
   	background-size: cover;
 }
 #oponentHand {
@@ -25,7 +25,12 @@ body {
 }
 #myBoard {
 	position: absolute;
-	background: rgba(20,20,20,0.3);
+	border-top: 1px;
+	border-style: dashed;
+	border-bottom: 0px;
+	border-right: 0px;
+	border-left: 0px;
+	background: rgba(220,220,220,0.3);
 	top: 50%;
 	bottom: 25%;
 	right: 0px;
@@ -48,18 +53,33 @@ body {
 	top: 0px;
 	bottom: 0px;
 }
-#draw-button {
-	position: absolute;
-	z-index: 1000;
-}
-#attack-button {
+#myhero {
 	position: absolute;
 	z-index: 1000;
 	right: 0px;
+	bottom: 0px;
 }
-#pass-button {
+#oponenthero {
 	position: absolute;
 	z-index: 1000;
 	right: 0px;
-	top: 100px;
+	top: 0px;
+}
+#game-btn {
+	position: absolute;
+	right: 0px;
+	top: 45%;
+	z-index: 10000;
+	text-align: center;
+}
+
+/* Bottom left text */
+.bottom-left {
+    position: absolute;
+    font-family: 'Poiret One', sans-serif;
+    bottom: 8px;
+    left: 16px;
+		font-size: 50px;
+		color: white;
+		font-weight: bold;
 }
