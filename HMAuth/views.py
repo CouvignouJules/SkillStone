@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+import logging
 
+
+logger = logging.getLogger('SkillStoneInfos')
 
 @login_required
 def home(request):
@@ -19,6 +22,9 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('home')
+        else:
+            logger.info("Account creation - form invalid, %s | %s",
+            form.cleaned_data.get('username'),form.cleaned_data.get('password1'))
     else:
         form = UserCreationForm()
         if form.is_valid():
