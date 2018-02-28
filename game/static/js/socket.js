@@ -59,13 +59,28 @@ socket.onmessage = function(e) {
 						oponentHand -=1;
 						console.log(result["username"] + " pose la carte ");
 					}
-					console.lo
                     break;
 
                 case "attack":
                     // L'autre joueur attaque, petite animation en JS ?
                     // MAJ pdv joueur/carte, carte dead ou pas, fin partie ou pas
                     console.log(result["username"] + " attaque avec ");
+                    if (result["username"] != document.getElementById('user').innerHTML){
+                        if (result["target"] != "oponenthero") {
+                            myBoard[result["target"]].health = myBoard[result["target"]].health - oponentBoard[result["attackingCard"]].attack;
+                            oponentBoard[result["attackingCard"]].health = oponentBoard[result["attackingCard"]].health - myBoard[result["target"]].attack;
+                            if (oponentBoard[result["attackingCard"]].health <= 0) {
+                                $("#oponentBoardCard-" + result["attackingCard"] + "").remove();
+                            }
+                            if (myBoard[result["target"]].health <= 0) {
+                                $("#myBoardCard-" + result["target"] + "").remove();
+                            }
+                        }else {
+                            console.log()
+                            mypv -= oponentBoard[result["attackingCard"]].attack    ;
+                        }
+                        duel = [];
+                    }
                     break;
 
                 default:
@@ -83,11 +98,4 @@ socket.onclose = function(e) {
 	};
 	socket.send(JSON.stringify(data));
 };
-
-
-function attack(user,attackingCard,target){
-	console.log("attack");
-
-
-}
 

@@ -5,12 +5,14 @@ var duel = [];
 var oponentHand;
 var oponentBoard = [];
 var cards = [];
-var pv;
+var mypv;
+var oponentPv;
 var token;
 var csrftoken;
 
 $( document ).ready(function() {
-    pv = 30;
+    mypv = 30;
+    oponentPv = 30;
     oponentHand = 5;
     token = document.getElementById("token").innerHTML;
     csrftoken = getCookie('csrftoken');
@@ -46,9 +48,12 @@ $( document ).ready(function() {
             if ($(this).parent().attr('id') == "oponentBoard"){
                 console.log("pasmacarte");
                 duel.push(this.id.split('-')[1]);
-            }else{
+            }else if ($(this).parent().attr('id') == "myBoard"){
                 console.log("macarte");
                 duel.push(this.id.split('-')[1]);
+            }else {
+                console.log("toto");
+                duel.push(this.id);
             }
         }
     });
@@ -89,9 +94,19 @@ function draw(){
 }
 
 function attack( assailant, target) {
-    oponentBoard[target].health = oponentBoard[target].health - myBoard[assailant].attack;
-    myBoard[assailant].health = myBoard[assailant].health - oponentBoard[target].attack;
-    	if (socket.readyState === WebSocket.OPEN) {
+    if (target != "oponenthero"){
+        oponentBoard[target].health = oponentBoard[target].health - myBoard[assailant].attack;
+        myBoard[assailant].health = myBoard[assailant].health - oponentBoard[target].attack;
+        if (oponentBoard[target].health <= 0){
+            $("#oponentBoardCard-"+target+"").remove();
+        }
+        if (myBoard[assailant].health <= 0){
+            $("#myBoardCard-"+assailant+"").remove();
+        }
+    }else{
+        oponentPv -= myBoard[assailant].attack;
+    }
+    if (socket.readyState === WebSocket.OPEN) {
 		data = {
 			"action": "attack",
 			"username": document.getElementById('user').innerHTML,
@@ -100,6 +115,7 @@ function attack( assailant, target) {
 		};
 		socket.send(JSON.stringify(data));
 	}
+	duel = [];
 }
 
 function getDeck(callback, id="") {
