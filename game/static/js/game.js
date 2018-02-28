@@ -22,7 +22,7 @@ $( document ).ready(function() {
         myDeck = shuffle(myDeck)
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i]);
-            $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
+            $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
             $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
             delete myDeck[i];
         }
@@ -34,18 +34,32 @@ $( document ).ready(function() {
             cards.push(element);
         });
     });
+
+    $(document).on('click', '.myHandCard', function () {
+        console.log($(this).children('input[name="cardId"]').val())
+        console.log(this.id.split('-')[1]);
+        putCard(this.id.split('-')[1],$(this).children('input[name="cardId"]').val())
+    });
 });
 
-function PutCard(id) {
-    myBoard.push(myHand[id]);
-    /* ajouter la div de la carte sur le board */
-    delete myHand[id];
-    myHand = cleanArray(myHand)
+function putCard(handId, cardId) {
+    myBoard.push(myHand[handId]);
+    $('#myBoard').append("<span class='myBoardCard' id='myBoardCard-"+myBoard.length+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
+    $("#myHandCard-"+handId+"").remove();
+    delete myHand[handId];
+    if (socket.readyState === WebSocket.OPEN) {
+		data = {
+			"action": "put",
+			"username": document.getElementById('user').innerHTML,
+			"cardId": cardId
+		};
+		socket.send(JSON.stringify(data));
+	}
 }
 
 function draw(){
     myHand.push(myDeck[0]);
-    $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
+    $('#myHand').append("<span class='myHandCard' id='myHandCard-"+(myHand.length-1)+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
     delete myDeck[0];
     myDeck = cleanArray(myDeck)
     if (socket.readyState === WebSocket.OPEN) {

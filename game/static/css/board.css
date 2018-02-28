@@ -23,7 +23,7 @@ body {
 	left: 0px;
 	text-align: center;
 }
-#myDeck {
+#myBoard {
 	position: absolute;
 	background: rgba(20,20,20,0.3);
 	top: 50%;

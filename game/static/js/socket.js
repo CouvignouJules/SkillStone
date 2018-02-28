@@ -42,13 +42,23 @@ socket.onmessage = function(e) {
                     	console.log("pk sa affiche pas")
                     }
                     if (result["username"] != document.getElementById('user').innerHTML) {
-                        $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
+                        $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + oponentHand + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
                     }
                     break;
 
                 case "put":
                     // L'autre joueur a poser une carte, petite animation en JS ?
-                    console.log(result["username"] + " pose la carte ");
+					if (result["username"] != document.getElementById('user').innerHTML) {
+						cards.forEach(function(element) {
+							if(element.id == result["cardId"]){
+								oponentBoard.push(element);
+								$('#oponentBoard').append("<span class='oponentBoardCard' id='oponentBoardCard-"+oponentBoard.length+"'><img title='"+element.name+"' src='"+element.img+"' style='width: 100px; height: 190px;' /></span>");
+							}
+						})
+						$("#oponentHandCard-0").remove()
+						oponentHand -=1;
+						console.log(result["username"] + " pose la carte ");
+					}
                     break;
 
                 case "attack":
@@ -73,35 +83,6 @@ socket.onclose = function(e) {
 	socket.send(JSON.stringify(data));
 };
 
-function gamedraw(number){
-	console.log("draw");
-
-	if (socket.readyState === WebSocket.OPEN) {
-		data = {
-			"action": "draw",
-			"username": document.getElementById('user').innerHTML,
-			"number": number
-		};
-		socket.send(JSON.stringify(data));
-	}
-}
-
-function put(card){
-	console.log("put");
-
-	if (socket.readyState === WebSocket.OPEN) {
-		data = {
-			"action": "put",
-			"username": document.getElementById('user').innerHTML,
-			"card": card
-		};
-		socket.send(JSON.stringify(data));
-	}
-
-
-
-
-}
 
 function attack(user,attackingCard,target){
 	console.log("attack");
