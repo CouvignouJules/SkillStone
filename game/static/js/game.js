@@ -2,7 +2,6 @@ var myDeck = [];
 var myHand = [];
 var myBoard = [];
 var duel = [];
-var oponentDeck;
 var oponentHand;
 var oponentBoard = [];
 var cards = [];
@@ -28,7 +27,7 @@ $( document ).ready(function() {
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i]);
             $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><input name='cardId' style='display: none' value='"+myDeck[i].id+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
-            $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + (i+1) + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
+            $('#oponentHand').append("<span class='oponentHandCard' id='oppnentHandCard-" + i + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
             delete myDeck[i];
         }
         myDeck = cleanArray(myDeck);
@@ -47,17 +46,25 @@ $( document ).ready(function() {
     });
 
     $(document).on('click', '.onBoardCard', function () {
-        if ($(this).parent().id == "oponentBoard"){
-            //duel.push(oponentBoard[].id)
-        }else{
-
+        if (duel.length < 2){
+            if ($(this).parent().attr('id') == "oponentBoard"){
+                console.log("pasmacarte");
+                duel.push(this.id.split('-')[1]);
+            }else{
+                console.log("macarte");
+                duel.push(this.id.split('-')[1]);
+            }
         }
     });
+
+    $('#attack-button').on('click', function () {
+        attack(duel[0],duel[1]);
+    })
 });
 
 function putCard(handId, cardId) {
     myBoard.push(myHand[handId]);
-    $('#myBoard').append("<span class='myBoardCard onBoardCard' id='myBoardCard-"+myBoard.length+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
+    $('#myBoard').append("<span class='myBoardCard onBoardCard' id='myBoardCard-"+(myBoard.length-1)+"'><img title='"+myHand[handId].name+"' src='"+myHand[handId].img+"' style='width: 100px; height: 190px;' /></span>")
     $("#myHandCard-"+handId+"").remove();
     print(myHand[handId]);
     delete myHand[handId];
@@ -86,7 +93,7 @@ function draw(){
 	}
 }
 
-function attaquer( assailant, target) {
+function attack( assailant, target) {
     oponentBoard[target].health = oponentBoard[target].health - myBoard[assailant].attack;
     myBoard[assailant].health = myBoard[assailant].health - oponentBoard[target].attack;
     	if (socket.readyState === WebSocket.OPEN) {
@@ -103,7 +110,7 @@ function attaquer( assailant, target) {
 function getDeck(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + ":8000/mydeck/deckCards/"+id,
+        url: "http://" + window.location.host + "/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
@@ -123,7 +130,7 @@ function getDeck(callback, id="") {
 function getCard(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://" + window.location.host + ":8000/mydeck/card/"+id,
+        url: "http://" + window.location.host + "/mydeck/card/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,
