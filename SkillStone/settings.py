@@ -27,7 +27,7 @@ SECRET_KEY = '6u)$tyv&d!q9ed&oy2n#%ikkj6dpb1@y-@_ni#n7=sm*qu)fq5'
 DEBUG = True
 
 ALLOWED_HOSTS = [socket.gethostbyname(socket.gethostname()),
-                 'localhost', '192.168.1.41']
+                 'localhost', 'skillstone.thulium.ovh']
 # Application definition
 
 INSTALLED_APPS = [
@@ -98,7 +98,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'skillstone',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306'
 
