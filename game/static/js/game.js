@@ -22,8 +22,8 @@ $( document ).ready(function() {
         myDeck = shuffle(myDeck)
         for (i= 0; i<5; i++){
             myHand.push(myDeck[i]);
-            $('#myHand').append("<div class='myHandCard' id='myHandCard-"+i+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 200px; height: 290px;' /></div>")
-            $('#opponentHand').append("<div class='opponentHandCard' id='oppnentHandCard-" + oponentHand + "'><img title='deck' src='game\static\img\deck.png' style='width: 200px; height: 290px;' /></div>")
+            $('#myHand').append("<span class='myHandCard' id='myHandCard-"+i+"'><img title='"+myDeck[i].name+"' src='"+myDeck[i].img+"' style='width: 100px; height: 190px;' /></span>")
+            $('#oponentHand').append("<spanspan class='oponentHandCard' id='oppnentHandCard-" + oponentHand + "'><img title='deck' src='game\static\img\deck.png' style='width: 100px; height: 190px;' /></span>")
             delete myDeck[i];
         }
         myDeck = cleanArray(myDeck);
@@ -65,7 +65,7 @@ function attaquer( attaquant, attaquer) {
 function getDeck(callback, id="") {
     $.ajax({
         type: "GET",
-        url: "http://10.13.7.217:8000/mydeck/deckCards/"+id,
+        url: "http://10.13.4.106:8000/mydeck/deckCards/"+id,
         dataType: "json",
         headers: {
             "Authorization": 'Token '+token,

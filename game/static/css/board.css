@@ -1,7 +1,50 @@
 body {
 	margin:0;
   	padding:0;
-  	background: url(/static/img/board.png) no-repeat center fixed; 
+  	background: url(/static/img/board.png) no-repeat center fixed;
   	-webkit-background-size: cover;
   	background-size: cover;
+}
+#oponentHand {
+	position: absolute;
+	background: rgba(120,120,120,0.3);
+	top: 0px;
+	bottom: 75%;
+	right: 0px;
+	left: 0px;
+	text-align: center;
+}
+#oponentBoard {
+	position: absolute;
+	background: rgba(220,220,220,0.3);
+	top: 25%;
+	bottom: 50%;
+	right: 0px;
+	left: 0px;
+	text-align: center;
+}
+#myDeck {
+	position: absolute;
+	background: rgba(20,20,20,0.3);
+	top: 50%;
+	bottom: 25%;
+	right: 0px;
+	left: 0px;
+	text-align: center;
+}
+#myHand {
+	position: absolute;
+	background: rgba(120,120,120,0.3);
+	top: 75%;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	text-align: center;
+}
+#board {
+	position: absolute;
+	right: 0px;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
 }
